@@ -37,6 +37,7 @@
   --cold:#4E6699;
   --cold-soft:#E2E8F4;
   --ok:#23845A;
+  --ok-soft:#DDF1E6;
   --err:#C0321B;
   --scrim:rgba(9,14,31,.55);
   --grad:linear-gradient(118deg,#10B2B4 0%,#0496C5 26%,#026FCE 52%,#193DB5 76%,#301C9F 100%);
@@ -66,6 +67,7 @@
     --cold:#A3B5DD;
     --cold-soft:#1C2647;
     --ok:#4CC98C;
+    --ok-soft:#12321F;
     --err:#FF7B5E;
     --scrim:rgba(0,0,0,.6);
     --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
@@ -91,6 +93,7 @@
   --cold:#A3B5DD;
   --cold-soft:#1C2647;
   --ok:#4CC98C;
+  --ok-soft:#12321F;
   --err:#FF7B5E;
   --scrim:rgba(0,0,0,.6);
   --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
@@ -132,7 +135,7 @@ button:disabled{cursor:default}
 .sync[data-state="synced"] i{background:var(--ok)}
 .sync[data-state="pending"] i{background:var(--warm)}
 .sync[data-state="blocked"] i,.sync[data-state="error"] i{background:var(--err)}
-.lock-btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 12px;font:600 14px var(--body);color:var(--ink);display:flex;align-items:center;gap:6px}
+.lock-btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:7px 12px;font:600 14px var(--body);color:var(--ink)}
 @media (max-width:640px){.tab .lg{display:none}.tab .sm{display:inline}.sync span{display:none}}
 @media (max-width:400px){.tab{padding-inline:8px;font-size:15px}}
 
@@ -157,6 +160,11 @@ main{padding-block:20px 0}
 textarea.input{min-height:96px;resize:vertical;line-height:1.45}
 .field.invalid .input{border-color:var(--err)}
 .err{margin:0;color:var(--err);font-size:14px;font-weight:500}
+.reveal{padding:14px;border-radius:10px;background:var(--brand-soft);border:1px solid color-mix(in srgb,var(--brand) 30%,transparent)}
+.reveal label{color:var(--brand-ink)}
+@media (prefers-reduced-motion:no-preference){.reveal:not([hidden]){animation:pop .2s ease-out}@keyframes pop{from{opacity:0;transform:translateY(-6px) scale(.98)}to{opacity:1;transform:none}}}
+.suggest{justify-self:start;border:0;background:none;padding:2px 0;color:var(--brand-ink);font:500 15px var(--body);text-align:left}
+.suggest b{font-weight:600;text-decoration:underline;text-underline-offset:3px}
 
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{min-height:46px;padding:10px 15px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font:500 15px/1.2 var(--body);text-align:left;display:inline-flex;align-items:center;gap:8px}
@@ -178,7 +186,7 @@ textarea.input{min-height:96px;resize:vertical;line-height:1.45}
 .consent input{width:24px;height:24px;margin:0;accent-color:var(--brand);flex:none}
 .consent small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
 
-.save{position:relative;isolation:isolate;min-height:56px;margin-inline:10px;padding-inline:24px;border:0;background:none;color:#fff;font:italic 800 19px var(--display);letter-spacing:.06em;text-transform:uppercase}
+.save{position:relative;isolation:isolate;min-height:56px;margin-inline:10px;padding-inline:26px;border:0;background:none;color:#fff;font:italic 800 19px var(--display);letter-spacing:.06em;text-transform:uppercase}
 .save::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:8px;background:var(--grad-green),var(--grad);transform:skewX(-14deg);box-shadow:0 6px 18px rgba(25,61,181,.28);transition:transform .15s,filter .15s}
 .save:hover::before{filter:brightness(1.06)}
 .save:active::before{transform:skewX(-14deg) scale(.98)}
@@ -188,31 +196,83 @@ textarea.input{min-height:96px;resize:vertical;line-height:1.45}
 .staff-name{flex:0 1 200px;min-width:0}
 .staff-name .input{min-height:52px}
 
-.btn{min-height:46px;padding:10px 16px;border:1px solid var(--brand);border-radius:8px;background:var(--surface);color:var(--brand-ink);font:600 15px var(--body);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn{min-height:46px;padding:10px 16px;border:1px solid var(--brand);border-radius:8px;background:var(--surface);color:var(--brand-ink);font:600 15px var(--body);white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
 .btn:hover{background:var(--brand-soft)}
 .btn.solid{background:var(--brand);color:#fff;border-color:var(--brand)}
 .btn.ghost{border-color:var(--line-strong);color:var(--ink)}
 .btn.danger{border-color:var(--line-strong);color:var(--err)}
 .btn.danger[data-armed="true"]{background:var(--err);border-color:var(--err);color:#fff}
+.btn:disabled{opacity:.4}
 .link-btn{border:0;background:none;padding:8px 4px;color:var(--brand-ink);font:600 15px var(--body)}
-
 .banner{margin-bottom:14px;padding:12px 14px;border-radius:10px;font-size:14px;background:var(--warm-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--warm) 40%,transparent)}
 .banner.err{background:var(--hot-soft);border-color:color-mix(in srgb,var(--hot) 40%,transparent)}
 
-/* Visitor area */
-.welcome{padding-block:6px 18px;display:grid;gap:6px}
-.welcome h1{margin:0;font:italic 800 clamp(28px,5vw,40px)/1.05 var(--display);letter-spacing:.005em;text-wrap:balance}
-.welcome p{margin:0;color:var(--muted);font-size:17px;max-width:58ch}
-.visitor-submit{display:flex;justify-content:flex-end;padding:18px 20px 22px;border-top:1px solid var(--line)}
-.visitor-submit .save{min-width:min(320px,100%)}
-.thanks{padding:40px 24px;display:grid;gap:14px;justify-items:start}
-.thanks .mark{width:56px;height:56px;border-radius:14px;background:var(--grad-green),var(--grad);display:grid;place-items:center;color:#fff}
-.thanks h2{margin:0;font:italic 800 clamp(28px,5vw,38px)/1.1 var(--display)}
-.thanks p{margin:0;font-size:18px;color:var(--muted);max-width:52ch}
+/* ===== Visitor: attract screen ===== */
+.attract-panel{position:relative;overflow:hidden;border-radius:18px;background:var(--grad-green),var(--grad);color:#fff;min-height:min(680px,74vh);display:grid;align-items:center;margin-block:4px 32px;cursor:pointer;box-shadow:0 18px 50px rgba(25,61,181,.25)}
+.attract-panel .stripe{position:absolute;top:-30%;height:160%;background:rgba(255,255,255,.09);transform:skewX(-18deg);pointer-events:none}
+.attract-panel .s1{width:220px;right:6%}
+.attract-panel .s2{width:60px;right:36%;background:rgba(255,255,255,.07)}
+.attract-panel .s3{width:120px;left:-40px;background:rgba(255,255,255,.05)}
+@media (prefers-reduced-motion:no-preference){
+  .attract-panel .s1{animation:drift 14s ease-in-out infinite alternate}
+  .attract-panel .s2{animation:drift 19s ease-in-out infinite alternate-reverse}
+  .attract-panel .s3{animation:drift 23s ease-in-out infinite alternate}
+  @keyframes drift{from{translate:-40px 0}to{translate:60px 0}}
+}
+.attract-inner{position:relative;z-index:1;padding:44px clamp(22px,5vw,48px);display:grid;gap:22px;justify-items:start}
+.eyebrow{margin:0;font:600 13px var(--display);letter-spacing:.14em;text-transform:uppercase;opacity:.92}
+.attract h1{margin:0;font:italic 800 clamp(38px,7.4vw,66px)/.98 var(--display);letter-spacing:-.005em;text-wrap:balance}
+.attract-lede{margin:0;font-size:clamp(17px,2.4vw,20px);max-width:44ch;opacity:.95}
+.offers{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%}
+.offers li{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.offers b{font:italic 700 17px/1.15 var(--display)}
+.offers span{font-size:14px;opacity:.92}
+@media (max-width:640px){.offers{grid-template-columns:1fr}}
+.start{position:relative;isolation:isolate;min-height:64px;margin:6px 12px 0;padding-inline:34px;border:0;background:none;color:#2D51A2;font:italic 800 21px var(--display);letter-spacing:.07em;text-transform:uppercase}
+.start::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:10px;background:#fff;transform:skewX(-14deg);box-shadow:0 10px 30px rgba(10,20,60,.3)}
+@media (prefers-reduced-motion:no-preference){.start::before{animation:breathe 2.6s ease-in-out infinite}@keyframes breathe{50%{transform:skewX(-14deg) scale(1.04)}}}
 
-/* Staff area */
+/* ===== Visitor: stepped flow ===== */
+.wiz-head{display:grid;gap:10px;margin-bottom:16px}
+.progress{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+.progress i{height:8px;border-radius:3px;background:var(--line);transform:skewX(-18deg);transition:background-color .2s}
+.progress i.done{background:var(--brand)}
+.progress i.now{background:var(--grad)}
+.wiz-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;font:600 13px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.wiz-meta .link-btn{font:600 14px var(--body);letter-spacing:0;text-transform:none}
+.step{padding:28px clamp(18px,4vw,32px) 30px;display:grid;gap:18px}
+@media (prefers-reduced-motion:no-preference){.step:not([hidden]){animation:stepIn .24s ease-out}@keyframes stepIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}}
+.step-q{margin:0;font:italic 800 clamp(26px,4.6vw,36px)/1.08 var(--display);letter-spacing:-.003em;text-wrap:balance;outline:none}
+.step-sub{margin:-8px 0 0;color:var(--muted);font-size:17px;max-width:56ch}
+.step .chips .chip{min-height:58px;padding:14px 18px;font-size:17px}
+.chips.stack{flex-direction:column}
+.chips.stack .chip{width:100%;justify-content:flex-start}
+.consent-card{display:flex;gap:16px;align-items:flex-start;padding:18px;border:1.5px solid var(--line-strong);border-radius:12px;cursor:pointer;font-size:18px;font-weight:500}
+.consent-card:has(input:checked){border-color:var(--brand);background:var(--brand-soft)}
+.consent-card input{width:28px;height:28px;margin:0;accent-color:var(--brand);flex:none}
+.consent-card small{display:block;color:var(--muted);font-size:15px;font-weight:400;margin-top:4px}
+.recap{display:grid;gap:10px;padding:16px 18px;border-radius:12px;background:var(--surface-2)}
+.recap h3{margin:0;font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;font-size:17px}
+.ticks li::before{content:"";flex:none;width:20px;height:20px;margin-top:2px;border-radius:6px;background:var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M5 10.5l3.2 3.2L15 7' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/20px no-repeat}
+.wiz-nav{position:sticky;bottom:0;z-index:15;margin-top:16px;background:var(--bg);border-top:1px solid var(--line);padding-block:12px calc(12px + env(safe-area-inset-bottom,0px))}
+.wiz-nav-inner{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wiz-nav .btn{min-height:56px;padding-inline:22px;font-size:17px}
+.wiz-nav .save{min-width:min(260px,55%)}
+
+.thanks{padding:40px clamp(20px,4vw,36px);display:grid;gap:16px;justify-items:start;margin-bottom:32px}
+.thanks .mark{width:60px;height:60px;border-radius:16px;background:var(--grad-green),var(--grad);display:grid;place-items:center;color:#fff}
+.thanks h2{margin:0;font:italic 800 clamp(30px,5vw,42px)/1.05 var(--display)}
+.thanks p{margin:0;font-size:18px;color:var(--muted);max-width:52ch}
+.countdown{width:100%;height:5px;border-radius:3px;background:var(--surface-2);overflow:hidden}
+.countdown i{display:block;height:100%;width:100%;background:var(--grad);transform-origin:left}
+.countdown.run i{animation:count 15s linear forwards}
+@keyframes count{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+/* ===== Staff ===== */
 .bar-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
-.seg{display:inline-flex;padding:3px;border-radius:10px;background:var(--surface-2);gap:2px}
+.seg{display:inline-flex;padding:3px;border-radius:10px;background:var(--surface-2);gap:2px;flex-wrap:wrap}
 .seg button{border:0;background:none;padding:9px 14px;border-radius:8px;font:600 15px var(--body);color:var(--muted);display:flex;align-items:center;gap:8px}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
 .editor-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
@@ -220,7 +280,8 @@ textarea.input{min-height:96px;resize:vertical;line-height:1.45}
 .summary{padding:18px 20px;display:grid;gap:12px}
 .summary-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .summary-head h3{margin:0;font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.tag{display:inline-block;padding:2px 8px;border-radius:5px;font:600 11px var(--display);letter-spacing:.08em;text-transform:uppercase;background:var(--surface-2);color:var(--muted)}
+.tag{display:inline-block;padding:2px 8px;border-radius:5px;font:600 11px var(--display);letter-spacing:.08em;text-transform:uppercase;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.tag.back{background:var(--ok-soft);color:var(--ok)}
 
 /* Lead rows */
 .leads{list-style:none;margin:0;padding:0;display:grid;gap:8px}
@@ -232,14 +293,15 @@ button.lead-head:hover{background:var(--surface-2)}
 .pill.warm{background:var(--warm-soft);color:var(--warm)}
 .pill.cold{background:var(--cold-soft);color:var(--cold)}
 .pill.need{background:var(--brand-soft);color:var(--brand-ink);font-style:normal;font-weight:600;letter-spacing:.04em}
-.who{min-width:0;display:grid;gap:1px}
+.who{min-width:0;display:grid;gap:2px}
 .who .name{font-weight:600;font-size:17px;overflow-wrap:anywhere}
 .who .co{color:var(--muted);font-size:14px;overflow-wrap:anywhere}
 .who .next{font-size:13px;color:var(--brand-ink);font-weight:500}
-.when{font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;display:grid;gap:2px;justify-items:end}
+.who .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}
+.when{font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;display:grid;gap:3px;justify-items:end}
 .when .unsynced{color:var(--warm);font-weight:600}
 @media (max-width:480px){.lead-head{grid-template-columns:auto 1fr}.when{grid-column:2;text-align:left;justify-items:start}}
-.lead-body{padding:4px 16px 16px;border-top:1px solid var(--line);display:grid;gap:14px}
+.lead-body{padding:4px 16px 16px;border-top:1px solid var(--line);display:grid;gap:16px}
 .details{display:grid;grid-template-columns:160px 1fr;gap:8px 16px;margin:12px 0 0;font-size:15px}
 .details dt{font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:2px}
 .details dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
@@ -250,17 +312,33 @@ button.lead-head:hover{background:var(--surface-2)}
 .empty h3{margin:0;font:italic 700 20px var(--display)}
 .empty p{margin:0;color:var(--muted);max-width:60ch}
 
-/* Data area */
+/* Follow-up status */
+.st{display:inline-block;padding:2px 8px;border-radius:5px;font:600 11px var(--display);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.st-todo{background:var(--brand-soft);color:var(--brand-ink)}
+.st-contacted{background:var(--cold-soft);color:var(--cold)}
+.st-meeting,.st-quoted{background:var(--warm-soft);color:var(--warm)}
+.st-won{background:var(--ok-soft);color:var(--ok)}
+.st-lost{background:var(--surface-2);color:var(--muted)}
+.fu{display:grid;gap:8px}
+.fu-label{font:600 12px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fu .chips{gap:6px}
+.fu .chip{min-height:38px;padding:6px 12px;font-size:14px}
+.draft{display:grid;gap:10px;padding:14px;border-radius:10px;background:var(--surface-2)}
+.draft .input{background:var(--surface)}
+.draft textarea.input{min-height:300px;font-size:15px}
+.draft-note{margin:0;font-size:14px;color:var(--warm);font-weight:500}
+
+/* ===== Data ===== */
 .stats{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin-bottom:16px}
 @media (max-width:760px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:420px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.stat[data-f="webinar"] .n{color:var(--brand-ink)}
-.stat{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 12px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-align:left;min-width:0}
+.stat{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:12px 9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-align:left;min-width:0}
 .stat .n{font:italic 700 28px/1 var(--display);font-variant-numeric:tabular-nums}
-.stat .l{font:600 11px var(--display);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.stat .l{font:600 11px var(--display);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 .stat[data-f="hot"] .n{color:var(--hot)}
 .stat[data-f="warm"] .n{color:var(--warm)}
 .stat[data-f="cold"] .n{color:var(--cold)}
+.stat[data-f="webinar"] .n{color:var(--brand-ink)}
 .stat[aria-pressed="true"]{border-color:var(--brand);box-shadow:inset 0 0 0 1px var(--brand);background:var(--brand-soft)}
 .breakdowns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
 @media (max-width:700px){.breakdowns{grid-template-columns:1fr}}
@@ -274,12 +352,13 @@ button.lead-head:hover{background:var(--surface-2)}
 .bar-row .bc{font-weight:600;font-variant-numeric:tabular-nums}
 .track{grid-column:1/-1;height:8px;border-radius:4px;background:var(--surface-2);overflow:hidden}
 .bar-row[aria-pressed="true"] .track{background:var(--surface)}
-.fill{display:block;height:100%;border-radius:4px;background:var(--brand);min-width:0}
-.bd-empty{margin:0;color:var(--muted);font-size:14px}
+.fill{display:block;height:100%;border-radius:4px;background:var(--brand)}
 .facet{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:14px;color:var(--muted);flex-wrap:wrap}
 .facet button{border:1px solid var(--brand);background:var(--brand-soft);color:var(--brand-ink);border-radius:6px;padding:5px 10px;font:600 14px var(--body)}
-.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.toolbar{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
 .toolbar .input{flex:1 1 220px;min-width:0}
+.list-controls{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.list-controls .seg button{padding:7px 11px;font-size:14px}
 .csv-panel{margin-bottom:14px;padding:14px;display:grid;gap:10px}
 .csv-panel p{margin:0;font-size:14px;color:var(--muted)}
 .csv-panel textarea{font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:140px}
@@ -297,17 +376,11 @@ button.lead-head:hover{background:var(--surface-2)}
 .key{min-height:62px;border:1px solid var(--line);border-radius:12px;background:var(--surface-2);font:600 26px var(--display);font-variant-numeric:tabular-nums}
 .key:active{background:var(--brand-soft)}
 .key.small{font:600 15px var(--body);color:var(--muted)}
-@media (prefers-reduced-motion:no-preference){
-  .shake{animation:shake .35s}
-  @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
-}
+@media (prefers-reduced-motion:no-preference){.shake{animation:shake .35s}@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}}
 
 .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);transform:translateX(-50%);z-index:40;width:min(560px,calc(100% - 32px));display:flex;align-items:center;gap:12px;padding:12px 14px 12px 16px;border-radius:10px;background:var(--ink);color:var(--bg);box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:15px}
 .toast span{flex:1;min-width:0;overflow-wrap:anywhere}
-@media (prefers-reduced-motion:no-preference){
-  .toast:not([hidden]){animation:rise .22s ease-out}
-  @keyframes rise{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
-}
+@media (prefers-reduced-motion:no-preference){.toast:not([hidden]){animation:rise .22s ease-out}@keyframes rise{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}}
 </style>
 </head>
 <body>
@@ -333,7 +406,7 @@ button.lead-head:hover{background:var(--surface-2)}
       </button>
       <button class="tab" role="tab" id="tab-data" aria-controls="view-data" aria-selected="false" data-go="data">
         <svg class="lock-ic" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
-        <span class="lg">Data &amp; export</span><span class="sm">Data</span>
+        <span class="lg">Data &amp; follow-up</span><span class="sm">Data</span>
       </button>
     </div>
     <div class="tab-right">
@@ -346,69 +419,112 @@ button.lead-head:hover{background:var(--surface-2)}
 <main>
   <div class="wrap"><div class="banner" id="banner" hidden></div></div>
 
-  <!-- ============ VISITOR SIGN-UP ============ -->
+  <!-- ================= VISITOR ================= -->
   <section id="view-visitor" role="tabpanel" aria-labelledby="tab-visitor">
-    <div class="wrap" style="padding-bottom:40px">
-      <div id="visitorFormWrap">
-        <div class="welcome">
-          <h1>Stay in touch with Produal</h1>
-          <p>Leave your details and we'll follow up with what you need after the show.</p>
+    <div class="wrap attract" id="attract">
+      <div class="attract-panel" id="attractPanel" role="button" tabindex="0" aria-label="Tap to start">
+        <span class="stripe s1"></span><span class="stripe s2"></span><span class="stripe s3"></span>
+        <div class="attract-inner">
+          <p class="eyebrow">Produal UK · Smart Buildings Show</p>
+          <h1>Leave your details.<br>We'll do the legwork.</h1>
+          <p class="attract-lede">Two minutes here and we'll follow up with exactly what you need.</p>
+          <ul class="offers">
+            <li><b>Cross-spec &amp; comparative pricing</b><span>Send us what you use now and we'll price a like-for-like Produal equivalent.</span></li>
+            <li><b>CIBSE-approved CPD</b><span>Smart IAQ &amp; Energy Efficient Buildings, as a lunch and learn for your team.</span></li>
+            <li><b>Webinar, Friday 30 October</b><span>Join the Produal UK webinar. We'll send the invite.</span></li>
+          </ul>
+          <button type="button" class="start" id="startBtn">Tap to start</button>
         </div>
-        <form id="visitorForm" class="card" novalidate autocomplete="off">
-          <div class="q">
-            <div class="q-head"><h2>Your details</h2></div>
+      </div>
+    </div>
+
+    <div id="wizard" hidden>
+      <div class="wrap wiz-head">
+        <div class="progress" id="progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wiz-meta"><span id="stepCount">Step 1 of 7</span><button type="button" class="link-btn" id="startOver">Start over</button></div>
+      </div>
+      <form id="visitorForm" class="wrap" novalidate autocomplete="off">
+        <div class="card">
+          <section class="step" data-step="0">
+            <h2 class="step-q" tabindex="-1">First, your details</h2>
+            <p class="step-sub">So we can send you what you need.</p>
             <div class="grid">
-              <div class="field" data-key="v-name"><label for="v-name">Name <span class="req">*</span></label><input class="input" id="v-name" data-form="v" data-field="name" placeholder="First and last name"></div>
-              <div class="field" data-key="v-company"><label for="v-company">Company <span class="req">*</span></label><input class="input" id="v-company" data-form="v" data-field="company" placeholder="Company name"></div>
-              <div class="field" data-key="v-email"><label for="v-email">Email <span class="req">*</span></label><input class="input" id="v-email" data-form="v" data-field="email" type="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="name@company.co.uk"></div>
-              <div class="field" data-key="v-phone"><label for="v-phone">Mobile</label><input class="input" id="v-phone" data-form="v" data-field="phone" type="tel" inputmode="tel" placeholder="Optional"></div>
-              <div class="field span2" data-key="v-title"><label for="v-title">Job title</label><input class="input" id="v-title" data-form="v" data-field="title" placeholder="e.g. Controls Project Engineer"></div>
+              <div class="field" data-key="v-name"><label for="v-name">Name <span class="req">*</span></label><input class="input" id="v-name" data-form="v" data-field="name" placeholder="First and last name" enterkeyhint="next"></div>
+              <div class="field" data-key="v-company"><label for="v-company">Company <span class="req">*</span></label><input class="input" id="v-company" data-form="v" data-field="company" placeholder="Company name" enterkeyhint="next"></div>
+              <div class="field" data-key="v-email"><label for="v-email">Email <span class="req">*</span></label><input class="input" id="v-email" data-form="v" data-field="email" type="email" inputmode="email" autocapitalize="none" spellcheck="false" placeholder="name@company.co.uk" enterkeyhint="next"><button type="button" class="suggest" id="v-emailSuggest" hidden></button></div>
+              <div class="field" data-key="v-phone"><label for="v-phone">Mobile</label><input class="input" id="v-phone" data-form="v" data-field="phone" type="tel" inputmode="tel" placeholder="Optional" enterkeyhint="next"></div>
+              <div class="field span2" data-key="v-title"><label for="v-title">Job title</label><input class="input" id="v-title" data-form="v" data-field="title" placeholder="e.g. Controls Project Engineer" enterkeyhint="next"></div>
             </div>
-          </div>
-          <div class="q">
-            <div class="q-head"><h2>What best describes you?</h2></div>
+          </section>
+
+          <section class="step" data-step="1" data-auto="role" hidden>
+            <h2 class="step-q" tabindex="-1">What best describes you?</h2>
             <div class="chips" data-form="v" data-group="role" data-mode="single" role="group" aria-label="What best describes you"></div>
-          </div>
-          <div class="q">
-            <div class="q-head"><h2>What are you interested in?</h2><span class="opt">Pick any</span></div>
+            <div class="field reveal" id="v-roleOtherWrap" hidden><label for="v-roleOther">Tell us what you do</label><input class="input" id="v-roleOther" data-form="v" data-field="roleOther" placeholder="e.g. Commissioning engineer, estimator"></div>
+          </section>
+
+          <section class="step" data-step="2" hidden>
+            <h2 class="step-q" tabindex="-1">What are you interested in?</h2>
+            <p class="step-sub">Pick as many as you like.</p>
             <div class="chips" data-form="v" data-group="interests" data-mode="multi" role="group" aria-label="Interests"></div>
-          </div>
-          <div class="q">
-            <div class="q-head"><h2>Do you have a project coming up?</h2></div>
-            <div class="chips" data-form="v" data-group="project" data-mode="single" role="group" aria-label="Project coming up"></div>
-          </div>
-          <div class="q">
-            <div class="q-head"><h2>What would help you most?</h2><span class="opt">Pick any</span></div>
+          </section>
+
+          <section class="step" data-step="3" data-auto="project" hidden>
+            <h2 class="step-q" tabindex="-1">Do you have a project coming up?</h2>
+            <div class="chips stack" data-form="v" data-group="project" data-mode="single" role="group" aria-label="Project coming up"></div>
+          </section>
+
+          <section class="step" data-step="4" hidden>
+            <h2 class="step-q" tabindex="-1">What would help you most?</h2>
+            <p class="step-sub">Pick as many as you like.</p>
             <div class="chips" data-form="v" data-group="wants" data-mode="multi" role="group" aria-label="What would help"></div>
-            <div class="field" id="v-crossWrap" hidden>
-              <label for="v-currentBrand">What do you use or have specified now?</label>
-              <input class="input" id="v-currentBrand" data-form="v" data-field="currentBrand" placeholder="e.g. Sontay room sensors, Siemens QPA, Honeywell">
-            </div>
-          </div>
-          <div class="q">
-            <div class="q-head"><h2>Are you interested in our webinar on Friday 30 October?</h2></div>
-            <div class="chips" data-form="v" data-group="webinar" data-mode="single" role="group" aria-label="Webinar on 30 October"></div>
-            <label class="consent">
+            <div class="field reveal" id="v-crossWrap" hidden><label for="v-currentBrand">What do you use or have specified now?</label><input class="input" id="v-currentBrand" data-form="v" data-field="currentBrand" placeholder="e.g. Sontay room sensors, Siemens QPA, Honeywell"></div>
+            <div class="field reveal" id="v-wantsOtherWrap" hidden><label for="v-wantsOther">What else can we help with?</label><textarea class="input" id="v-wantsOther" data-form="v" data-field="wantsOther" rows="3" placeholder="Tell us in a sentence or two"></textarea></div>
+          </section>
+
+          <section class="step" data-step="5" data-auto="webinar" hidden>
+            <h2 class="step-q" tabindex="-1">Are you interested in our webinar on Friday 30 October?</h2>
+            <p class="step-sub">A Produal UK webinar. We'll send you the joining details.</p>
+            <div class="chips stack" data-form="v" data-group="webinar" data-mode="single" role="group" aria-label="Webinar on 30 October"></div>
+          </section>
+
+          <section class="step" data-step="6" hidden>
+            <h2 class="step-q" tabindex="-1">Can we keep in touch?</h2>
+            <label class="consent-card" for="v-consent">
               <input type="checkbox" id="v-consent" data-form="v" data-field="consent">
               <span>Produal can contact me about this
-                <small>We'll only use your details to follow up. Opt out any time.</small>
+                <small>We'll only use your details to follow up on what you've asked for. Opt out any time.</small>
               </span>
             </label>
-          </div>
-          <div class="visitor-submit"><button type="submit" class="save">Send my details</button></div>
-        </form>
+            <div class="recap">
+              <h3>What we'll follow up with</h3>
+              <ul class="ticks" id="recapList"></ul>
+            </div>
+          </section>
+        </div>
+      </form>
+      <div class="wiz-nav">
+        <div class="wrap wiz-nav-inner">
+          <button type="button" class="btn ghost" id="wizBack">Back</button>
+          <button type="button" class="save" id="wizNext">Next</button>
+        </div>
       </div>
+    </div>
 
-      <div class="card thanks" id="thanks" hidden>
-        <div class="mark"><svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="wrap" id="thanksWrap" hidden>
+      <div class="card thanks">
+        <div class="mark"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h2 id="thanksTitle">Thanks.</h2>
-        <p id="thanksText">We'll be in touch after the show. Please hand the iPad back to one of the team.</p>
-        <button type="button" class="btn solid" id="nextVisitor">Start a new sign-up</button>
+        <p>Here's what happens next:</p>
+        <ul class="ticks" id="thanksList"></ul>
+        <p>Please hand the iPad back to one of the team.</p>
+        <div class="countdown" id="countdown"><i></i></div>
+        <button type="button" class="btn solid" id="doneBtn">Done</button>
       </div>
     </div>
   </section>
 
-  <!-- ============ STAFF NOTES ============ -->
+  <!-- ================= STAFF ================= -->
   <section id="view-staff" role="tabpanel" aria-labelledby="tab-staff" hidden>
     <div id="staffList" class="wrap" style="padding-bottom:40px">
       <div class="bar-head">
@@ -421,7 +537,7 @@ button.lead-head:hover{background:var(--surface-2)}
       <ol class="leads" id="staffRows"></ol>
       <div class="card empty" id="staffEmpty" hidden>
         <h3 id="staffEmptyTitle">Everyone is covered</h3>
-        <p id="staffEmptyText">New visitor sign-ups appear here so you can add your notes. Use New lead for anyone who didn't sign up themselves.</p>
+        <p>New visitor sign-ups appear here so you can add your notes. Returning visitors come back here too. Use New lead for anyone who didn't sign up themselves.</p>
       </div>
     </div>
 
@@ -455,6 +571,7 @@ button.lead-head:hover{background:var(--surface-2)}
           <div class="q">
             <div class="q-head"><h2>What do they do?</h2></div>
             <div class="chips" data-form="s" data-group="role" data-mode="single" role="group" aria-label="What do they do"></div>
+            <div class="field reveal" id="s-roleOtherWrap" hidden><label for="s-roleOther">What they do</label><input class="input" id="s-roleOther" data-form="s" data-field="roleOther"></div>
           </div>
           <div class="q">
             <div class="q-head"><h2>Interested in</h2><span class="opt">Pick any</span></div>
@@ -467,10 +584,14 @@ button.lead-head:hover{background:var(--surface-2)}
           <div class="q">
             <div class="q-head"><h2>What they asked for</h2><span class="opt">Pick any</span></div>
             <div class="chips" data-form="s" data-group="wants" data-mode="multi" role="group" aria-label="What they asked for"></div>
+            <div class="field reveal" id="s-wantsOtherWrap" hidden><label for="s-wantsOther">What else they asked for</label><textarea class="input" id="s-wantsOther" data-form="s" data-field="wantsOther" rows="2"></textarea></div>
           </div>
           <div class="q">
             <div class="q-head"><h2>Webinar on 30 October?</h2></div>
             <div class="chips" data-form="s" data-group="webinar" data-mode="single" role="group" aria-label="Webinar on 30 October"></div>
+          </div>
+          <div class="q">
+            <div class="q-head"><h2>Keeping in touch</h2></div>
             <label class="consent">
               <input type="checkbox" id="s-consent" data-form="s" data-field="consent">
               <span>Produal can contact them about this<small>Tick only if they've agreed.</small></span>
@@ -517,7 +638,7 @@ button.lead-head:hover{background:var(--surface-2)}
     </form>
   </section>
 
-  <!-- ============ DATA & EXPORT ============ -->
+  <!-- ================= DATA & FOLLOW-UP ================= -->
   <section id="view-data" role="tabpanel" aria-labelledby="tab-data" hidden>
     <div class="wrap" style="padding-bottom:40px">
       <div class="stats" role="group" aria-label="Filter leads">
@@ -533,20 +654,28 @@ button.lead-head:hover{background:var(--surface-2)}
       <div class="breakdowns">
         <div class="card bd"><h3>What they do</h3><div id="bd-role"></div></div>
         <div class="card bd"><h3>Interested in</h3><div id="bd-interests"></div></div>
-        <div class="card bd"><h3>Next steps agreed</h3><div id="bd-nextSteps"></div></div>
-        <div class="card bd"><h3>Captured by</h3><div id="bd-capturedBy"></div></div>
+        <div class="card bd"><h3>They asked for</h3><div id="bd-wants"></div></div>
+        <div class="card bd"><h3>Follow-up progress</h3><div id="bd-status"></div></div>
       </div>
 
       <div class="toolbar">
         <label for="search" class="visually-hidden">Search leads</label>
         <input class="input" type="search" id="search" placeholder="Search name, company, notes">
+        <button class="btn" id="webinarBtn" type="button">Copy webinar list</button>
         <button class="btn solid" id="exportBtn" type="button">Export CSV</button>
+      </div>
+      <div class="list-controls">
+        <div class="seg" role="group" aria-label="Follow-up status" id="statusFilter"></div>
+        <div class="seg" role="group" aria-label="Sort">
+          <button type="button" data-sort="priority" aria-pressed="true">Hottest first</button>
+          <button type="button" data-sort="newest" aria-pressed="false">Newest</button>
+        </div>
       </div>
       <div class="facet" id="facet" hidden></div>
 
       <div class="card csv-panel" id="csvPanel" hidden>
-        <p>The download was blocked here. Select all, copy, and paste into Excel.</p>
-        <label for="csvText" class="visually-hidden">CSV</label>
+        <p id="csvHint">The download was blocked here. Select all, copy, and paste into Excel.</p>
+        <label for="csvText" class="visually-hidden">Text to copy</label>
         <textarea class="input" id="csvText" readonly></textarea>
         <div class="actions"><button class="btn" type="button" id="csvSelect">Select all</button><button class="btn ghost" type="button" id="csvClose">Close</button></div>
       </div>
@@ -554,9 +683,9 @@ button.lead-head:hover{background:var(--surface-2)}
       <ol class="leads" id="dataRows"></ol>
       <div class="card empty" id="dataEmpty" hidden>
         <h3>No leads yet</h3>
-        <p>Visitor sign-ups and staff notes land here as they're saved, for everyone with access to this page. Tap a lead for the full record.</p>
+        <p>Visitor sign-ups and staff notes land here as they're saved. After the show, open a lead to draft its follow-up email and track where it's got to.</p>
       </div>
-      <p class="key-note" id="noMatch" hidden>No leads match that filter.</p>
+      <p class="key-note" id="noMatch" hidden>No leads match those filters.</p>
     </div>
   </section>
 </main>
@@ -588,7 +717,7 @@ button.lead-head:hover{background:var(--surface-2)}
     role: ["BMS contractor","System integrator","M&E consultant","M&E contractor","Facilities / building owner","Distributor","Other"],
     interests: ["Room sensors & controllers","Pressure & duct","Wireless (MESH / LoRaWAN)","IAQ & CO₂","Gas detection"],
     project: [["0-3","Yes, in the next 3 months"],["3-12","Yes, in 3 to 12 months"],["none","Not right now"]],
-    wants: [CROSS_WANT,"Product datasheets","A price for a project","CPD for my team","A demo or site visit","A sample to try"],
+    wants: [CROSS_WANT,"Product datasheets","A price for a project","CPD for my team","A demo or site visit","A sample to try","Other"],
     webinar: [["yes","Yes, send me the invite"],["no","Not this time"]],
     nextSteps: ["Cross-spec & comparative pricing","Send datasheets","Price a job","Book CPD / lunch & learn","Site visit or demo","Send a sample"],
     heat: [["hot","Hot"],["warm","Warm"],["cold","Cold"]]
@@ -600,12 +729,22 @@ button.lead-head:hover{background:var(--surface-2)}
   WANT_TO_STEP["CPD for my team"] = "Book CPD / lunch & learn";
   WANT_TO_STEP["A demo or site visit"] = "Site visit or demo";
   WANT_TO_STEP["A sample to try"] = "Send a sample";
+  var WANT_PROMISE = {};
+  WANT_PROMISE[CROSS_WANT] = "A like-for-like cross-spec with comparative pricing";
+  WANT_PROMISE["Product datasheets"] = "Datasheets for the products you picked";
+  WANT_PROMISE["A price for a project"] = "A price for your project";
+  WANT_PROMISE["CPD for my team"] = "Dates for our CIBSE-approved CPD";
+  WANT_PROMISE["A demo or site visit"] = "A call to arrange a demo or visit";
+  WANT_PROMISE["A sample to try"] = "A sample to try";
   var WARM_STEPS = ["Cross-spec & comparative pricing","Price a job","Site visit or demo"];
+  var STATUS = [["todo","To contact"],["contacted","Contacted"],["meeting","Meeting booked"],["quoted","Quoted"],["won","Won"],["lost","Lost"]];
+  var STATUS_LABEL = {}; STATUS.forEach(function(s){ STATUS_LABEL[s[0]] = s[1]; });
   var PROJECT_LABEL = {"0-3":"Next 3 months","3-12":"3 to 12 months","none":"Not right now"};
   var WEBINAR_LABEL = {"yes":"Yes","no":"No"};
   var STANDALONE = !(window.claude && typeof window.claude.use === "function");
   var K_PENDING = "produal-sbs-pending-v1", K_STAFF = "produal-sbs-staff-v1";
-  var IDLE_LOCK_MS = 5 * 60 * 1000, VISITOR_IDLE_MS = 2 * 60 * 1000, THANKS_MS = 20 * 1000;
+  var IDLE_LOCK_MS = 5 * 60 * 1000, VISITOR_IDLE_MS = 90 * 1000, THANKS_MS = 15 * 1000;
+  var STEPS = 7;
 
   function $(id){ return document.getElementById(id); }
   function lsGet(k, d){ try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch(e){ return d; } }
@@ -616,19 +755,27 @@ button.lead-head:hover{background:var(--surface-2)}
   function clean(l){ var o = Object.assign({}, l); delete o._pending; return o; }
   function isLive(l){ return l.project === "0-3" || l.project === "3-12"; }
   function reduced(){ return matchMedia("(prefers-reduced-motion: reduce)").matches; }
+  function needsNotes(l){ return !l.staffAt || (!!l.lastVisitAt && l.lastVisitAt > l.staffAt); }
+  function statusOf(l){ return l.status || "todo"; }
+  function roleLabel(l){ return l.role === "Other" && l.roleOther ? "Other: " + l.roleOther : (l.role || ""); }
+  function wantsList(l, short){ return (l.wants || []).map(function(w){ return w === "Other" && l.wantsOther ? "Other: " + l.wantsOther : (short && w === CROSS_WANT ? "Cross-spec & comparative pricing" : w); }); }
+  function joinList(a){ return a.length < 2 ? (a[0] || "") : a.slice(0,-1).join(", ") + " and " + a[a.length-1]; }
+  function lowerFirst(s){ return /^[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s; }
 
   var state = {
     view: "visitor", unlocked: false, pinTarget: null, pinBuf: "",
     db: null, downloads: null, mode: "connecting",
     remote: new Map(), pending: lsGet(K_PENDING, []), deleted: new Set(),
     flushing: false, blocked: false, quota: false, subError: false,
+    vstage: "attract", step: 0, emailDismissed: "",
     staffMode: "list", staffFilter: "waiting", detailsOpen: false,
-    dataFilter: "all", facet: null, q: "", open: new Set(),
-    lastActivity: Date.now(), thanksAt: 0
+    dataFilter: "all", statusFilter: "all", sort: "priority", facet: null, q: "",
+    open: new Set(), draftOpen: new Set(), drafts: {}, dataDirty: false,
+    lastActivity: Date.now(), thanksAt: 0, autoTimer: null
   };
   if (!Array.isArray(state.pending)) state.pending = [];
 
-  function blankVisitor(){ return {name:"",company:"",email:"",phone:"",title:"",role:"",interests:[],project:"",wants:[],currentBrand:"",webinar:"",consent:false}; }
+  function blankVisitor(){ return {name:"",company:"",email:"",phone:"",title:"",role:"",roleOther:"",interests:[],project:"",wants:[],wantsOther:"",currentBrand:"",webinar:"",consent:false}; }
   function blankStaff(){ return Object.assign(blankVisitor(), {id:null, source:"staff", createdAt:"", heat:"", heatAuto:true, nextSteps:[], projectName:"", notes:""}); }
   var models = { v: blankVisitor(), s: blankStaff() };
 
@@ -645,17 +792,24 @@ button.lead-head:hover{background:var(--surface-2)}
     });
     box.addEventListener("click", function(ev){
       var b = ev.target.closest(".chip"); if (!b) return;
-      var v = b.getAttribute("data-value"), m = models[f];
+      var v = b.getAttribute("data-value"), m = models[f], selected;
       if (box.getAttribute("data-mode") === "multi"){
         var arr = m[g].slice(), i = arr.indexOf(v);
         if (i >= 0) arr.splice(i,1); else arr.push(v);
-        m[g] = arr;
-      } else { m[g] = m[g] === v ? "" : v; }
+        m[g] = arr; selected = i < 0;
+      } else { m[g] = m[g] === v ? "" : v; selected = m[g] === v; }
       if (f === "s"){
         if (g === "heat"){ m.heatAuto = false; $("s-err-heat").hidden = true; }
         if ((g === "project" || g === "nextSteps") && m.heatAuto) m.heat = suggestHeat(m);
       }
       syncForm(f);
+      if (selected && (v === "Other" || v === CROSS_WANT)){
+        var target = { "v-role": "v-roleOther", "v-wants": v === "Other" ? "v-wantsOther" : "v-currentBrand", "s-role": "s-roleOther", "s-wants": v === "Other" ? "s-wantsOther" : null }[f + "-" + g];
+        if (target) setTimeout(function(){ try { $(target).focus({preventScroll:true}); $(target).scrollIntoView({block:"center", behavior: reduced() ? "auto" : "smooth"}); } catch(e){} }, 60);
+      }
+      if (f === "v" && selected && box.closest(".step") && box.closest(".step").getAttribute("data-auto") === g && v !== "Other"){
+        clearTimeout(state.autoTimer); state.autoTimer = setTimeout(function(){ goStep(state.step + 1); }, 320);
+      }
     });
   });
 
@@ -666,6 +820,8 @@ button.lead-head:hover{background:var(--surface-2)}
     models[f][k] = el.type === "checkbox" ? el.checked : el.value;
     var wrap = document.querySelector('[data-key="' + f + "-" + k + '"]');
     if (wrap && wrap.classList.contains("invalid")){ wrap.classList.remove("invalid"); var e = wrap.querySelector(".err"); if (e) e.remove(); }
+    if (f === "v" && k === "email") $("v-emailSuggest").hidden = true;
+    if (f === "v" && k === "consent") renderRecap();
   }
   document.addEventListener("input", onField);
   document.addEventListener("change", onField);
@@ -691,14 +847,17 @@ button.lead-head:hover{background:var(--surface-2)}
         b.setAttribute("aria-pressed", (Array.isArray(val) ? val.indexOf(v) >= 0 : val === v) ? "true" : "false");
       });
     });
+    $(f + "-roleOtherWrap").hidden = m.role !== "Other";
+    $(f + "-wantsOtherWrap").hidden = m.wants.indexOf("Other") < 0;
+    if (f === "v"){ $("v-crossWrap").hidden = m.wants.indexOf(CROSS_WANT) < 0; renderRecap(); }
     if (f === "s") $("suggested").hidden = !(m.heatAuto && m.heat);
-    if (f === "v") $("v-crossWrap").hidden = m.wants.indexOf(CROSS_WANT) < 0;
   }
 
   function clearErrors(f){
     document.querySelectorAll('[data-key^="' + f + '-"]').forEach(function(w){ w.classList.remove("invalid"); var e = w.querySelector(".err"); if (e) e.remove(); });
     if (f === "s") $("s-err-heat").hidden = true;
   }
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   function validate(f){
     clearErrors(f);
     var m = models[f], first = null;
@@ -710,7 +869,7 @@ button.lead-head:hover{background:var(--surface-2)}
     }
     if (!m.name.trim()) mark("name", f === "v" ? "Please add your name." : "Add their name.");
     if (!m.company.trim()) mark("company", f === "v" ? "Please add your company." : "Add their company.");
-    var em = m.email.trim(), emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em);
+    var em = m.email.trim(), emailOk = EMAIL_RE.test(em);
     if (f === "v"){
       if (!em) mark("email","Please add your email so we can follow up.");
       else if (!emailOk) mark("email","That email doesn't look complete.");
@@ -719,43 +878,148 @@ button.lead-head:hover{background:var(--surface-2)}
       else if (em && !emailOk) mark("email","That email doesn't look complete.");
       if (!m.heat){ $("s-err-heat").textContent = "Pick hot, warm or cold."; $("s-err-heat").hidden = false; if (!first) first = document.querySelector('.chips[data-form="s"][data-group="heat"] .chip'); }
     }
-    if (first){ if (f === "s" && !state.detailsOpen && first.closest("#detailsCard")) { state.detailsOpen = true; renderEditorChrome(); } first.focus({preventScroll:true}); first.scrollIntoView({block:"center", behavior: reduced() ? "auto" : "smooth"}); }
+    if (first){
+      if (f === "s" && !state.detailsOpen && first.closest("#detailsCard")){ state.detailsOpen = true; renderEditorChrome(); }
+      first.focus({preventScroll:true}); first.scrollIntoView({block:"center", behavior: reduced() ? "auto" : "smooth"});
+    }
     return !first;
   }
 
-  /* ================= Visitor ================= */
-  $("visitorForm").addEventListener("submit", function(ev){
-    ev.preventDefault();
-    if (!validate("v")) return;
-    var m = models.v;
-    var lead = {
-      id: newId(), createdAt: new Date().toISOString(), show: SHOW, source: "visitor",
-      name: m.name.trim(), company: m.company.trim(), email: m.email.trim(), phone: m.phone.trim(), title: m.title.trim(),
-      role: m.role, interests: m.interests.slice(), project: m.project, wants: m.wants.slice(),
-      currentBrand: m.wants.indexOf(CROSS_WANT) >= 0 ? m.currentBrand.trim() : "", webinar: m.webinar, consent: !!m.consent,
-      heat: "", nextSteps: [], projectName: "", notes: "", capturedBy: "", staffAt: ""
-    };
-    upsertPending(lead); flush();
-    $("thanksTitle").textContent = "Thanks, " + lead.name.split(/\s+/)[0] + ".";
-    $("thanksText").textContent = lead.webinar === "yes"
-      ? "We'll be in touch after the show, and your invite to the webinar on 30 October is on its way. Please hand the iPad back to one of the team."
-      : "We'll be in touch after the show. Please hand the iPad back to one of the team.";
-    $("visitorFormWrap").hidden = true; $("thanks").hidden = false; state.thanksAt = Date.now();
-    models.v = blankVisitor(); syncForm("v"); clearErrors("v");
-    window.scrollTo({top:0});
-    renderCounts();
-  });
-  function resetVisitor(){
-    models.v = blankVisitor(); syncForm("v"); clearErrors("v");
-    $("thanks").hidden = true; $("visitorFormWrap").hidden = false; state.thanksAt = 0;
+  /* ---------- Email typo check ---------- */
+  var DOMAINS = ["gmail.com","googlemail.com","outlook.com","hotmail.com","hotmail.co.uk","live.co.uk","yahoo.com","yahoo.co.uk","icloud.com","btinternet.com","sky.com","aol.com"];
+  function lev(a, b){
+    var d = []; for (var i = 0; i <= a.length; i++){ d[i] = [i]; }
+    for (var j = 1; j <= b.length; j++) d[0][j] = j;
+    for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++)
+      d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a[i-1] === b[j-1] ? 0 : 1));
+    return d[a.length][b.length];
   }
-  $("nextVisitor").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); try { $("v-name").focus({preventScroll:true}); } catch(e){} });
-  function visitorHasInput(){ var m = models.v; return !!(m.name || m.company || m.email || m.phone || m.title || m.role || m.project || m.webinar || m.currentBrand || m.interests.length || m.wants.length || m.consent); }
+  function suggestEmail(e){
+    var at = e.lastIndexOf("@"); if (at < 1) return null;
+    var user = e.slice(0, at), dom = e.slice(at + 1).toLowerCase().replace(/\.+$/, "");
+    if (!dom) return null;
+    var fixed = dom.replace(/\.co\.?u?k?$/, function(m){ return m === ".co" ? m : ".co.uk"; }).replace(/\.couk$/, ".co.uk").replace(/\.(con|cmo|cm|comm|om)$/, ".com");
+    if (DOMAINS.indexOf(fixed) >= 0) return fixed !== dom ? user + "@" + fixed : null;
+    var best = null, bd = 3;
+    DOMAINS.forEach(function(d){ var x = lev(fixed, d); if (x < bd){ bd = x; best = d; } });
+    if (best && bd <= 2 && fixed.length > 4) return user + "@" + best;
+    return fixed !== dom ? user + "@" + fixed : null;
+  }
+  function checkEmail(){
+    var em = models.v.email.trim(), s = em ? suggestEmail(em) : null, b = $("v-emailSuggest");
+    if (s && s !== state.emailDismissed){ b.innerHTML = "Did you mean <b>" + esc(s) + "</b>?"; b.setAttribute("data-s", s); b.hidden = false; return true; }
+    b.hidden = true; return false;
+  }
+  $("v-email").addEventListener("blur", checkEmail);
+  $("v-emailSuggest").addEventListener("click", function(){ models.v.email = this.getAttribute("data-s"); syncForm("v"); this.hidden = true; });
+
+  /* ================= Visitor flow ================= */
+  function showStage(stage){
+    state.vstage = stage;
+    $("attract").hidden = stage !== "attract";
+    $("wizard").hidden = stage !== "wizard";
+    $("thanksWrap").hidden = stage !== "thanks";
+    var cd = $("countdown"); cd.classList.remove("run");
+    if (stage === "thanks"){ void cd.offsetWidth; if (!reduced()) cd.classList.add("run"); }
+  }
+  function resetVisitor(){
+    clearTimeout(state.autoTimer);
+    models.v = blankVisitor(); state.emailDismissed = ""; syncForm("v"); clearErrors("v");
+    $("v-emailSuggest").hidden = true; state.thanksAt = 0; state.step = 0;
+    showStage("attract");
+  }
+  function startWizard(){
+    models.v = blankVisitor(); syncForm("v"); clearErrors("v");
+    showStage("wizard"); goStep(0, true);
+    setTimeout(function(){ try { $("v-name").focus({preventScroll:true}); } catch(e){} }, 80);
+  }
+  $("startBtn").addEventListener("click", function(ev){ ev.stopPropagation(); startWizard(); });
+  $("attractPanel").addEventListener("click", startWizard);
+  $("attractPanel").addEventListener("keydown", function(ev){ if (ev.key === "Enter" || ev.key === " "){ ev.preventDefault(); startWizard(); } });
+  $("startOver").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); });
+
+  function goStep(i, silent){
+    clearTimeout(state.autoTimer);
+    if (i < 0) i = 0;
+    if (i >= STEPS){ submitVisitor(); return; }
+    state.step = i;
+    document.querySelectorAll("#visitorForm .step").forEach(function(s){ s.hidden = +s.getAttribute("data-step") !== i; });
+    document.querySelectorAll("#progress i").forEach(function(seg, k){ seg.className = k < i ? "done" : (k === i ? "now" : ""); });
+    $("stepCount").textContent = "Step " + (i + 1) + " of " + STEPS;
+    $("wizBack").disabled = i === 0;
+    $("wizNext").textContent = i === STEPS - 1 ? "Send my details" : "Next";
+    if (i === STEPS - 1) renderRecap();
+    window.scrollTo({top:0});
+    if (!silent && i > 0){ var h = document.querySelector('#visitorForm .step[data-step="' + i + '"] .step-q'); if (h) try { h.focus({preventScroll:true}); } catch(e){} }
+  }
+  $("wizBack").addEventListener("click", function(){ goStep(state.step - 1); });
+  $("wizNext").addEventListener("click", function(){
+    if (state.step === 0){
+      if (!validate("v")) return;
+      if (checkEmail() && $("v-emailSuggest").getAttribute("data-s") !== state.emailDismissed){
+        state.emailDismissed = $("v-emailSuggest").getAttribute("data-s");
+        $("v-emailSuggest").focus(); return;
+      }
+    }
+    goStep(state.step + 1);
+  });
+  $("visitorForm").addEventListener("submit", function(ev){ ev.preventDefault(); });
+  $("visitorForm").addEventListener("keydown", function(ev){
+    if (ev.key !== "Enter" || ev.target.tagName === "TEXTAREA" || ev.target.tagName === "BUTTON") return;
+    ev.preventDefault();
+    var order = ["v-name","v-company","v-email","v-phone","v-title"], i = order.indexOf(ev.target.id);
+    if (i >= 0 && i < order.length - 1) $(order[i+1]).focus(); else $("wizNext").click();
+  });
+
+  function promises(m){
+    var out = (m.wants || []).map(function(w){ return w === "Other" ? (m.wantsOther ? "A reply about: " + m.wantsOther : null) : WANT_PROMISE[w]; }).filter(Boolean);
+    if (m.webinar === "yes") out.push("Your invite to the webinar on Friday 30 October");
+    if (!out.length) out.push("A follow-up on today's conversation");
+    return out;
+  }
+  function renderRecap(){
+    var items = promises(models.v);
+    $("recapList").innerHTML = items.map(function(t){ return "<li>" + esc(t) + "</li>"; }).join("");
+  }
+
+  function submitVisitor(){
+    var m = models.v, now = new Date().toISOString();
+    var fresh = {
+      name: m.name.trim(), company: m.company.trim(), email: m.email.trim(), phone: m.phone.trim(), title: m.title.trim(),
+      role: m.role, roleOther: m.role === "Other" ? m.roleOther.trim() : "",
+      interests: m.interests.slice(), project: m.project, wants: m.wants.slice(),
+      wantsOther: m.wants.indexOf("Other") >= 0 ? m.wantsOther.trim() : "",
+      currentBrand: m.wants.indexOf(CROSS_WANT) >= 0 ? m.currentBrand.trim() : "",
+      webinar: m.webinar, consent: !!m.consent
+    };
+    var existing = fresh.email ? allLeads().filter(function(l){ return (l.email || "").toLowerCase() === fresh.email.toLowerCase(); })[0] : null;
+    var lead;
+    if (existing){
+      lead = clean(existing);
+      Object.keys(fresh).forEach(function(k){
+        var v = fresh[k];
+        if (Array.isArray(v)){ var u = (lead[k] || []).slice(); v.forEach(function(x){ if (u.indexOf(x) < 0) u.push(x); }); lead[k] = u; }
+        else if (k === "consent") lead[k] = v;
+        else if (v) lead[k] = v;
+      });
+      lead.visits = (lead.visits || 1) + 1; lead.lastVisitAt = now;
+    } else {
+      lead = Object.assign({id: newId(), createdAt: now, show: SHOW, source: "visitor", visits: 1, lastVisitAt: now,
+        heat: "", nextSteps: [], projectName: "", notes: "", capturedBy: "", staffAt: "", status: "todo"}, fresh);
+    }
+    upsertPending(lead); flush();
+    $("thanksTitle").textContent = "Thanks, " + fresh.name.split(/\s+/)[0] + ".";
+    $("thanksList").innerHTML = promises(fresh).map(function(t){ return "<li>" + esc(t) + "</li>"; }).join("");
+    models.v = blankVisitor(); syncForm("v"); clearErrors("v");
+    state.thanksAt = Date.now(); showStage("thanks"); window.scrollTo({top:0});
+  }
+  $("doneBtn").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); });
+  function visitorHasInput(){ var m = models.v; return !!(m.name || m.company || m.email || m.phone || m.title || m.role || m.project || m.webinar || m.currentBrand || m.wantsOther || m.roleOther || m.interests.length || m.wants.length || m.consent); }
 
   /* ================= Views + PIN ================= */
   function go(view){
     if ((view === "staff" || view === "data") && !state.unlocked){ openPin(view); return; }
-    if (view === "visitor" && state.unlocked) lock(true);
+    if (view === "visitor" && state.unlocked){ lock(true); resetVisitor(); }
     state.view = view;
     ["visitor","staff","data"].forEach(function(v){
       $("view-" + v).hidden = v !== view;
@@ -772,7 +1036,7 @@ button.lead-head:hover{background:var(--surface-2)}
     state.unlocked = false; state.staffMode = "list";
     document.querySelectorAll(".lock-ic").forEach(function(i){ i.style.display = ""; });
     $("lockBtn").hidden = true; $("needBadge").hidden = true;
-    if (!silent) go("visitor");
+    if (!silent){ resetVisitor(); go("visitor"); }
   }
   function unlock(){
     state.unlocked = true; state.lastActivity = Date.now();
@@ -783,7 +1047,7 @@ button.lead-head:hover{background:var(--surface-2)}
 
   function openPin(target){
     state.pinTarget = target; state.pinBuf = "";
-    $("pinSub").textContent = "Enter the PIN to open " + (target === "staff" ? "Staff notes." : "Data & export.");
+    $("pinSub").textContent = "Enter the PIN to open " + (target === "staff" ? "Staff notes." : "Data & follow-up.");
     $("pinErr").hidden = true; renderPin(); $("pin").hidden = false;
     setTimeout(function(){ try { document.querySelector('#keypad [data-k="1"]').focus(); } catch(e){} }, 30);
   }
@@ -834,7 +1098,7 @@ button.lead-head:hover{background:var(--surface-2)}
     var lead = id ? findLead(id) : null;
     var m = blankStaff();
     if (lead){
-      Object.keys(m).forEach(function(k){ if (lead[k] !== undefined) m[k] = Array.isArray(lead[k]) ? lead[k].slice() : lead[k]; });
+      Object.keys(m).forEach(function(k){ if (lead[k] !== undefined && lead[k] !== null) m[k] = Array.isArray(lead[k]) ? lead[k].slice() : lead[k]; });
       m.id = lead.id; m.source = lead.source || "staff"; m.createdAt = lead.createdAt;
       if (!lead.staffAt && !m.nextSteps.length){
         m.nextSteps = (lead.wants || []).map(function(w){ return WANT_TO_STEP[w] || null; }).filter(Boolean);
@@ -856,9 +1120,9 @@ button.lead-head:hover{background:var(--surface-2)}
     $("detailsCard").hidden = !isNew && !state.detailsOpen;
     $("editDetailsBtn").textContent = state.detailsOpen ? "Done editing" : "Edit their details";
     if (!isNew){
-      var rows = [["Email", m.email],["Mobile", m.phone],["Job title", m.title],["What they do", m.role],
+      var rows = [["Email", m.email],["Mobile", m.phone],["Job title", m.title],["What they do", roleLabel(m)],
         ["Interested in", m.interests.join(", ")],["Project", PROJECT_LABEL[m.project] || ""],
-        ["Asked for", m.wants.join(", ")],["Uses now", m.currentBrand],["Webinar 30 Oct", WEBINAR_LABEL[m.webinar] || ""],
+        ["Asked for", wantsList(m).join(", ")],["Uses now", m.currentBrand],["Webinar 30 Oct", WEBINAR_LABEL[m.webinar] || ""],
         ["Can contact", m.consent ? "Yes" : "No"]].filter(function(r){ return r[1]; });
       $("summaryList").innerHTML = rows.map(function(r){ return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("");
     }
@@ -868,13 +1132,17 @@ button.lead-head:hover{background:var(--surface-2)}
     ev.preventDefault();
     if (!validate("s")) return;
     var m = models.s, base = m.id ? findLead(m.id) : null;
-    var lead = Object.assign(base ? clean(base) : {id: newId(), createdAt: new Date().toISOString(), show: SHOW, source: "staff"}, {
+    var lead = Object.assign(base ? clean(base) : {id: newId(), createdAt: new Date().toISOString(), show: SHOW, source: "staff", visits: 1, status: "todo"}, {
       name: m.name.trim(), company: m.company.trim(), email: m.email.trim(), phone: m.phone.trim(), title: m.title.trim(),
-      role: m.role, interests: m.interests.slice(), project: m.project, wants: m.wants.slice(), webinar: m.webinar, consent: !!m.consent,
+      role: m.role, roleOther: m.role === "Other" ? (m.roleOther || "").trim() : "",
+      interests: m.interests.slice(), project: m.project, wants: m.wants.slice(),
+      wantsOther: m.wants.indexOf("Other") >= 0 ? (m.wantsOther || "").trim() : "",
+      webinar: m.webinar, consent: !!m.consent,
       heat: m.heat, nextSteps: m.nextSteps.slice(), projectName: m.projectName.trim(), currentBrand: m.currentBrand.trim(),
       notes: m.notes.trim(), capturedBy: staffNameEl.value.trim(), staffAt: new Date().toISOString()
     });
     upsertPending(lead); flush();
+    delete state.drafts[lead.id];
     toast("Notes saved for " + lead.name);
     models.s = blankStaff(); state.staffMode = "list"; renderStaff(); window.scrollTo({top:0});
   });
@@ -883,24 +1151,25 @@ button.lead-head:hover{background:var(--surface-2)}
     var editing = state.staffMode === "edit";
     $("staffList").hidden = editing; $("staffEditor").hidden = !editing;
     if (editing){ renderEditorChrome(); return; }
-    var all = allLeads(), waiting = all.filter(function(l){ return !l.staffAt; });
+    var all = allLeads(), waiting = all.filter(needsNotes);
     $("segWaiting").textContent = waiting.length; $("segAll").textContent = all.length;
     var rows = state.staffFilter === "waiting" ? waiting : all;
     $("staffEmpty").hidden = rows.length > 0;
     $("staffEmptyTitle").textContent = state.staffFilter === "waiting" ? (all.length ? "Everyone is covered" : "No visitors yet") : "No leads yet";
     $("staffRows").innerHTML = rows.map(function(l){
-      var sub = [l.company, l.role].filter(Boolean).join(" · ");
-      var line = l.staffAt ? (l.nextSteps || []).join(" · ") : ((l.wants || []).length ? "Asked for: " + l.wants.join(", ") : "");
+      var sub = [l.company, roleLabel(l)].filter(Boolean).join(" · ");
+      var line = !needsNotes(l) ? (l.nextSteps || []).join(" · ") : (wantsList(l).length ? "Asked for: " + wantsList(l, true).join(", ") : "");
       return '<li class="lead"><button type="button" class="lead-head" data-open="' + esc(l.id) + '">' +
-        (l.staffAt ? '<span class="pill ' + esc(l.heat) + '">' + esc(l.heat) + '</span>' : '<span class="pill need">Needs notes</span>') +
-        '<span class="who"><span class="name">' + esc(l.name) + '</span>' + (sub ? '<span class="co">' + esc(sub) + '</span>' : '') + (line ? '<span class="next">' + esc(line) + '</span>' : '') + '</span>' +
-        '<span class="when"><span>' + esc(fmtTime(l.createdAt)) + '</span><span class="tag">' + (l.source === "visitor" ? "Visitor" : "Staff") + '</span>' + unsyncedTag(l) + '</span>' +
+        (!needsNotes(l) ? '<span class="pill ' + esc(l.heat) + '">' + esc(l.heat) + '</span>' : '<span class="pill need">Needs notes</span>') +
+        '<span class="who"><span class="name">' + esc(l.name) + '</span>' + (sub ? '<span class="co">' + esc(sub) + '</span>' : '') + (line ? '<span class="next">' + esc(line) + '</span>' : '') +
+          ((l.visits || 1) > 1 ? '<span class="tags"><span class="tag back">Came back · visit ' + l.visits + '</span></span>' : '') + '</span>' +
+        '<span class="when"><span>' + esc(fmtTime(l.lastVisitAt || l.createdAt)) + '</span><span class="tag">' + (l.source === "visitor" ? "Visitor" : "Staff") + '</span>' + unsyncedTag(l) + '</span>' +
         '</button></li>';
     }).join("");
   }
   function unsyncedTag(l){ return l._pending ? '<span class="unsynced">' + (state.db && !state.blocked ? "Not synced yet" : "This device only") + '</span>' : ""; }
 
-  /* ================= Data & export ================= */
+  /* ================= Data & follow-up ================= */
   document.querySelectorAll(".stat").forEach(function(b){
     b.addEventListener("click", function(){
       state.dataFilter = b.getAttribute("data-f");
@@ -908,6 +1177,14 @@ button.lead-head:hover{background:var(--surface-2)}
       renderData();
     });
   });
+  document.querySelectorAll("[data-sort]").forEach(function(b){
+    b.addEventListener("click", function(){
+      state.sort = b.getAttribute("data-sort");
+      document.querySelectorAll("[data-sort]").forEach(function(x){ x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      renderData();
+    });
+  });
+  $("statusFilter").addEventListener("click", function(ev){ var b = ev.target.closest("[data-st]"); if (!b) return; state.statusFilter = b.getAttribute("data-st"); renderData(); });
   $("search").addEventListener("input", function(){ state.q = this.value; renderData(); });
   $("facet").addEventListener("click", function(ev){ if (ev.target.closest("button")){ state.facet = null; renderData(); } });
   document.querySelector(".breakdowns").addEventListener("click", function(ev){
@@ -917,89 +1194,153 @@ button.lead-head:hover{background:var(--surface-2)}
     renderData();
   });
 
-  var FACET_NAME = {role:"What they do", interests:"Interested in", nextSteps:"Next steps", capturedBy:"Captured by"};
-  function matchFacet(l){
-    if (!state.facet) return true;
-    var val = l[state.facet.k];
-    return Array.isArray(val) ? val.indexOf(state.facet.v) >= 0 : val === state.facet.v;
+  var FACET_NAME = {role:"What they do", interests:"Interested in", wants:"They asked for", status:"Follow-up"};
+  function facetValues(l, k){
+    if (k === "status") return [STATUS_LABEL[statusOf(l)]];
+    var v = l[k]; return Array.isArray(v) ? v : (v ? [v] : []);
   }
+  function matchFacet(l){ return !state.facet || facetValues(l, state.facet.k).indexOf(state.facet.v) >= 0; }
 
   function renderBars(k, leads){
-    var counts = new Map(), order = OPTIONS[k] ? OPTIONS[k].slice() : [];
-    order.forEach(function(o){ counts.set(o, 0); });
-    leads.forEach(function(l){
-      var val = l[k]; (Array.isArray(val) ? val : [val]).forEach(function(v){ if (v) counts.set(v, (counts.get(v) || 0) + 1); });
-    });
-    var entries = Array.from(counts.entries()).sort(function(a,b){ return b[1] - a[1] || order.indexOf(a[0]) - order.indexOf(b[0]); });
-    var box = $("bd-" + k);
-    if (!entries.length || entries.every(function(e){ return !e[1]; }) && k === "capturedBy"){ box.innerHTML = '<p class="bd-empty">Fills in as staff add notes.</p>'; return; }
-    var max = Math.max.apply(null, entries.map(function(e){ return e[1]; }).concat([1]));
-    var total = leads.length || 1;
-    box.innerHTML = entries.map(function(e){
+    var order = k === "status" ? STATUS.map(function(s){ return s[1]; }) : OPTIONS[k].map(function(o){ return Array.isArray(o) ? o[1] : o; });
+    var counts = new Map(); order.forEach(function(o){ counts.set(o, 0); });
+    leads.forEach(function(l){ facetValues(l, k).forEach(function(v){ if (counts.has(v)) counts.set(v, counts.get(v) + 1); }); });
+    var entries = Array.from(counts.entries());
+    if (k !== "status") entries.sort(function(a,b){ return b[1] - a[1] || order.indexOf(a[0]) - order.indexOf(b[0]); });
+    var max = Math.max.apply(null, entries.map(function(e){ return e[1]; }).concat([1])), total = leads.length || 1;
+    $("bd-" + k).innerHTML = entries.map(function(e){
       var on = state.facet && state.facet.k === k && state.facet.v === e[0];
+      var label = e[0] === CROSS_WANT ? "Cross-spec & comparative pricing" : e[0];
       var pct = Math.round(e[1] / total * 100);
       return '<button type="button" class="bar-row" data-k="' + k + '" data-v="' + esc(e[0]) + '" aria-pressed="' + (on ? "true" : "false") + '"' + (e[1] ? '' : ' disabled') +
-        ' title="' + esc(e[0] + ": " + e[1] + (e[1] === 1 ? " lead" : " leads") + " (" + pct + "% of all)") + '">' +
-        '<span class="bl">' + esc(e[0]) + '</span><span class="bc">' + e[1] + '</span>' +
+        ' title="' + esc(label + ": " + e[1] + (e[1] === 1 ? " lead" : " leads") + " (" + pct + "% of all)") + '">' +
+        '<span class="bl">' + esc(label) + '</span><span class="bc">' + e[1] + '</span>' +
         '<span class="track"><span class="fill" style="width:' + (e[1] / max * 100).toFixed(1) + '%"></span></span></button>';
     }).join("");
   }
 
+  function priority(l){
+    var r = needsNotes(l) && !l.heat ? 2 : ({hot:0, warm:1, cold:3}[l.heat] != null ? {hot:0, warm:1, cold:3}[l.heat] : 2);
+    return r * 2 + (isLive(l) ? 0 : 1);
+  }
+
   function renderData(){
+    if (document.activeElement && $("dataRows").contains(document.activeElement) && /INPUT|TEXTAREA/.test(document.activeElement.tagName)){ state.dataDirty = true; }
     var all = allLeads();
     var c = {all: all.length, hot:0, warm:0, cold:0, live:0, webinar:0, need:0};
-    all.forEach(function(l){ if (l.staffAt && (l.heat === "hot" || l.heat === "warm" || l.heat === "cold")) c[l.heat]++; if (isLive(l)) c.live++; if (l.webinar === "yes") c.webinar++; if (!l.staffAt) c.need++; });
+    all.forEach(function(l){ if (l.staffAt && c[l.heat] != null && l.heat) c[l.heat]++; if (isLive(l)) c.live++; if (l.webinar === "yes") c.webinar++; if (needsNotes(l)) c.need++; });
     Object.keys(c).forEach(function(k){ $("k-" + k).textContent = c[k]; });
-    ["role","interests","nextSteps","capturedBy"].forEach(function(k){ renderBars(k, all); });
+    ["role","interests","wants","status"].forEach(function(k){ renderBars(k, all); });
+
+    var sc = {all: all.length}; STATUS.forEach(function(s){ sc[s[0]] = 0; }); all.forEach(function(l){ sc[statusOf(l)]++; });
+    $("statusFilter").innerHTML = [["all","All"]].concat(STATUS).map(function(s){
+      return '<button type="button" data-st="' + s[0] + '" aria-pressed="' + (state.statusFilter === s[0]) + '">' + esc(s[1]) + ' <span class="count">' + sc[s[0]] + '</span></button>';
+    }).join("");
 
     var fc = $("facet");
-    if (state.facet){ fc.hidden = false; fc.innerHTML = "Showing " + esc(FACET_NAME[state.facet.k]) + ": <b>" + esc(state.facet.v) + "</b> <button type=\"button\">Clear</button>"; }
+    if (state.facet){ var fl = state.facet.v === CROSS_WANT ? "Cross-spec & comparative pricing" : state.facet.v; fc.hidden = false; fc.innerHTML = "Showing " + esc(FACET_NAME[state.facet.k]) + ": <b>" + esc(fl) + "</b> <button type=\"button\">Clear</button>"; }
     else fc.hidden = true;
+
+    if (state.dataDirty) return;
 
     var q = state.q.trim().toLowerCase();
     var rows = all.filter(function(l){
       var f = state.dataFilter;
       if (f === "live" && !isLive(l)) return false;
-      if (f === "need" && l.staffAt) return false;
+      if (f === "need" && !needsNotes(l)) return false;
       if (f === "webinar" && l.webinar !== "yes") return false;
       if ((f === "hot" || f === "warm" || f === "cold") && !(l.staffAt && l.heat === f)) return false;
+      if (state.statusFilter !== "all" && statusOf(l) !== state.statusFilter) return false;
       if (!matchFacet(l)) return false;
       if (!q) return true;
-      return [l.name,l.company,l.title,l.email,l.notes,l.projectName,l.currentBrand,l.role,l.capturedBy].join(" ").toLowerCase().indexOf(q) >= 0;
+      return [l.name,l.company,l.title,l.email,l.notes,l.projectName,l.currentBrand,l.role,l.roleOther,l.wantsOther,l.capturedBy].join(" ").toLowerCase().indexOf(q) >= 0;
     });
+    if (state.sort === "priority") rows.sort(function(a,b){ return priority(a) - priority(b) || String(b.createdAt).localeCompare(String(a.createdAt)); });
     $("dataEmpty").hidden = all.length > 0;
     $("noMatch").hidden = !(all.length > 0 && rows.length === 0);
-
-    $("dataRows").innerHTML = rows.map(function(l){
-      var open = state.open.has(l.id);
-      var sub = [l.company, l.role].filter(Boolean).join(" · ");
-      var next = (l.nextSteps || []).join(" · ");
-      var details = [
-        ["Email", l.email],["Mobile", l.phone],["Job title", l.title],
-        ["Interested in", (l.interests || []).join(", ")],["Project", PROJECT_LABEL[l.project] || ""],
-        ["Project or site", l.projectName],["Currently specified", l.currentBrand],
-        ["They asked for", (l.wants || []).join(", ")],["Next steps agreed", (l.nextSteps || []).join(", ")],
-        ["Webinar 30 Oct", WEBINAR_LABEL[l.webinar] || ""],
-        ["Notes", l.notes],["Can contact", l.consent ? "Yes" : "No"],
-        ["Came from", l.source === "visitor" ? "Visitor sign-up" : "Staff entry"],["Captured by", l.capturedBy]
-      ].filter(function(r){ return r[1]; });
-      return '<li class="lead" data-id="' + esc(l.id) + '">' +
-        '<button type="button" class="lead-head" aria-expanded="' + open + '">' +
-          (l.staffAt ? '<span class="pill ' + esc(l.heat) + '">' + esc(l.heat) + '</span>' : '<span class="pill need">Needs notes</span>') +
-          '<span class="who"><span class="name">' + esc(l.name) + '</span>' + (sub ? '<span class="co">' + esc(sub) + '</span>' : '') + (next ? '<span class="next">' + esc(next) + '</span>' : '') + '</span>' +
-          '<span class="when"><span>' + esc(fmtTime(l.createdAt)) + '</span>' + unsyncedTag(l) + '</span>' +
-        '</button>' +
-        '<div class="lead-body"' + (open ? '' : ' hidden') + '>' +
-          '<dl class="details">' + details.map(function(r){ return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("") + '</dl>' +
-          '<div class="actions">' +
-            '<button type="button" class="btn" data-act="edit">' + (l.staffAt ? "Edit notes" : "Add notes") + '</button>' +
-            (l.email ? '<button type="button" class="btn ghost" data-act="copy">Copy email</button>' : '') +
-            '<button type="button" class="btn danger" data-act="del">Delete</button>' +
-          '</div>' +
-        '</div></li>';
-    }).join("");
+    $("dataRows").innerHTML = rows.map(renderLeadRow).join("");
   }
 
+  function renderLeadRow(l){
+    var open = state.open.has(l.id), st = statusOf(l);
+    var sub = [l.company, roleLabel(l)].filter(Boolean).join(" · ");
+    var next = (l.nextSteps || []).join(" · ") || (wantsList(l).length ? "Asked for: " + wantsList(l, true).join(", ") : "");
+    var details = [
+      ["Email", l.email],["Mobile", l.phone],["Job title", l.title],
+      ["Interested in", (l.interests || []).join(", ")],["Project", PROJECT_LABEL[l.project] || ""],
+      ["Project or site", l.projectName],["Currently specified", l.currentBrand],
+      ["They asked for", wantsList(l).join(", ")],["Next steps agreed", (l.nextSteps || []).join(", ")],
+      ["Webinar 30 Oct", WEBINAR_LABEL[l.webinar] || ""],["Notes", l.notes],["Can contact", l.consent ? "Yes" : "No"],
+      ["Came from", (l.source === "visitor" ? "Visitor sign-up" : "Staff entry") + ((l.visits || 1) > 1 ? ", " + l.visits + " visits" : "")],["Captured by", l.capturedBy]
+    ].filter(function(r){ return r[1]; });
+    var draftHtml = "";
+    if (state.draftOpen.has(l.id)){
+      var d = state.drafts[l.id] || (state.drafts[l.id] = buildDraft(l));
+      var mail = "mailto:" + encodeURIComponent(l.email || "") + "?subject=" + encodeURIComponent(d.subject) + "&body=" + encodeURIComponent(d.body);
+      draftHtml = '<div class="draft">' +
+        (!l.consent ? '<p class="draft-note">They didn\'t tick "Produal can contact me". Check you\'re happy to email them before sending.</p>' : '') +
+        '<div class="field"><label for="ds-' + esc(l.id) + '">Subject</label><input class="input" id="ds-' + esc(l.id) + '" data-draft="subject" value="' + esc(d.subject) + '"></div>' +
+        '<div class="field"><label for="db-' + esc(l.id) + '">Email</label><textarea class="input" id="db-' + esc(l.id) + '" data-draft="body">' + esc(d.body) + '</textarea></div>' +
+        '<div class="actions">' +
+          '<button type="button" class="btn solid" data-act="copydraft">Copy email</button>' +
+          (l.email ? '<button type="button" class="btn" data-act="copyaddr">Copy address</button><a class="btn ghost" href="' + esc(mail) + '" target="_blank" rel="noopener">Open in mail app</a>' : '') +
+          '<button type="button" class="btn ghost" data-act="redraft">Start again</button>' +
+          (st === "todo" ? '<button type="button" class="btn ghost" data-act="status" data-v="contacted">Mark as contacted</button>' : '') +
+        '</div></div>';
+    }
+    return '<li class="lead" data-id="' + esc(l.id) + '">' +
+      '<button type="button" class="lead-head" aria-expanded="' + open + '">' +
+        (!needsNotes(l) || l.heat ? '<span class="pill ' + esc(l.heat) + '">' + esc(l.heat || "") + '</span>' : '<span class="pill need">Needs notes</span>') +
+        '<span class="who"><span class="name">' + esc(l.name) + '</span>' + (sub ? '<span class="co">' + esc(sub) + '</span>' : '') + (next ? '<span class="next">' + esc(next) + '</span>' : '') +
+          '<span class="tags"><span class="st st-' + st + '">' + esc(STATUS_LABEL[st]) + '</span>' + (l.webinar === "yes" ? '<span class="tag">Webinar</span>' : '') + ((l.visits || 1) > 1 ? '<span class="tag back">Came back</span>' : '') + '</span></span>' +
+        '<span class="when"><span>' + esc(fmtTime(l.createdAt)) + '</span>' + unsyncedTag(l) + '</span>' +
+      '</button>' +
+      '<div class="lead-body"' + (open ? '' : ' hidden') + '>' +
+        '<dl class="details">' + details.map(function(r){ return "<dt>" + esc(r[0]) + "</dt><dd>" + esc(r[1]) + "</dd>"; }).join("") + '</dl>' +
+        '<div class="fu"><span class="fu-label">Follow-up</span><div class="chips">' + STATUS.map(function(s){ return '<button type="button" class="chip" data-act="status" data-v="' + s[0] + '" aria-pressed="' + (st === s[0]) + '">' + esc(s[1]) + '</button>'; }).join("") + '</div></div>' +
+        '<div class="actions">' +
+          '<button type="button" class="btn solid" data-act="draft">' + (state.draftOpen.has(l.id) ? "Hide email draft" : "Draft follow-up email") + '</button>' +
+          '<button type="button" class="btn" data-act="edit">' + (needsNotes(l) ? "Add notes" : "Edit notes") + '</button>' +
+          '<button type="button" class="btn danger" data-act="del">Delete</button>' +
+        '</div>' + draftHtml +
+      '</div></li>';
+  }
+
+  function buildDraft(l){
+    var first = (l.name || "").trim().split(/\s+/)[0] || "there";
+    var wants = l.wants || [], steps = l.nextSteps || [];
+    function has(step, want){ return steps.indexOf(step) >= 0 || wants.indexOf(want) >= 0; }
+    var cross = has("Cross-spec & comparative pricing", CROSS_WANT), price = has("Price a job","A price for a project"),
+        sheets = has("Send datasheets","Product datasheets"), cpd = has("Book CPD / lunch & learn","CPD for my team"),
+        visit = has("Site visit or demo","A demo or site visit"), sample = has("Send a sample","A sample to try");
+    var subject = cross ? "Your cross-spec and comparative pricing from Produal" : price ? "Pricing for your project, from Produal" : "Good to meet you at the Smart Buildings Show";
+    var p = ["Hi " + first + ","];
+    var intro = "Thanks for stopping by the Produal stand at the Smart Buildings Show.";
+    var ints = (l.interests || []).map(lowerFirst);
+    if (ints.length) intro += " It was good to hear you're looking at " + joinList(ints) + ".";
+    p.push(intro);
+    if (cross) p.push("As promised, if you send over your current sensor schedule or a recent order" + (l.currentBrand ? " (you mentioned " + l.currentBrand + ")" : "") + ", I'll come back with a line-by-line Produal equivalent and pricing so you can compare like for like.");
+    if (price) p.push("If you can send the drawings or schedule for " + (l.projectName || "the project") + ", I'll get a price back to you" + (l.project === "0-3" ? " quickly, given it's coming up in the next few months." : "."));
+    if (sheets) p.push("I've attached the datasheets for the products we talked about.");
+    if (cpd) p.push("We run a CIBSE-approved CPD, Smart IAQ & Energy Efficient Buildings, which we can deliver as a lunch and learn for your team. Let me know a couple of dates that suit.");
+    if (visit) p.push("I'd be happy to come and see you, or run a quick demo for your team. What does your diary look like over the next couple of weeks?");
+    if (sample) p.push("I'll get a sample out to you so your engineers can try it on the bench.");
+    if (l.wantsOther) p.push("You also mentioned “" + l.wantsOther + "”. I'll come back to you on that.");
+    if (!cross && !price && !sheets && !cpd && !visit && !sample && !l.wantsOther) p.push("If there's a project coming up with sensors, pressure or wireless monitoring on the schedule, I'd be glad to help with selection and pricing.");
+    if (l.webinar === "yes") p.push("Your invite to our webinar on Friday 30 October will follow separately.");
+    var me = staffNameEl.value.trim();
+    p.push(me ? "Kind regards,\n" + me + "\nProdual UK" : "Kind regards,\nThe Produal UK team");
+    return {subject: subject, body: p.join("\n\n")};
+  }
+
+  $("dataRows").addEventListener("input", function(ev){
+    var el = ev.target, k = el.getAttribute("data-draft"); if (!k) return;
+    var id = el.closest(".lead").getAttribute("data-id");
+    state.drafts[id] = state.drafts[id] || {subject:"", body:""}; state.drafts[id][k] = el.value;
+  });
+  $("dataRows").addEventListener("focusout", function(){
+    setTimeout(function(){ if (state.dataDirty && !($("dataRows").contains(document.activeElement))){ state.dataDirty = false; renderData(); } }, 0);
+  });
   $("dataRows").addEventListener("click", function(ev){
     var li = ev.target.closest(".lead"); if (!li) return;
     var id = li.getAttribute("data-id"), act = ev.target.closest("[data-act]");
@@ -1010,13 +1351,17 @@ button.lead-head:hover{background:var(--surface-2)}
       li.querySelector(".lead-head").setAttribute("aria-expanded", state.open.has(id));
       return;
     }
-    var a = act.getAttribute("data-act"), lead = findLead(id);
-    if (a === "edit"){ go("staff"); openEditor(id); return; }
-    if (a === "copy" && lead){
-      var p; try { p = navigator.clipboard.writeText(lead.email); } catch(e){ p = Promise.reject(e); }
-      p.then(function(){ toast("Copied " + lead.email); }, function(){ toast(lead.email); });
-      return;
+    var a = act.getAttribute("data-act"), lead = findLead(id); if (!lead) return;
+    if (a === "status"){
+      var v = act.getAttribute("data-v");
+      upsertPending(Object.assign(clean(lead), {status: v, statusAt: new Date().toISOString()})); flush();
+      toast(lead.name + ": " + STATUS_LABEL[v]); return;
     }
+    if (a === "draft"){ if (state.draftOpen.has(id)) state.draftOpen.delete(id); else state.draftOpen.add(id); state.dataDirty = false; renderData(); return; }
+    if (a === "redraft"){ state.drafts[id] = buildDraft(lead); state.dataDirty = false; renderData(); return; }
+    if (a === "copydraft"){ var d = state.drafts[id] || buildDraft(lead); copyText("Subject: " + d.subject + "\n\n" + d.body, "Email copied. Paste it into Outlook."); return; }
+    if (a === "copyaddr"){ copyText(lead.email, "Copied " + lead.email); return; }
+    if (a === "edit"){ go("staff"); openEditor(id); return; }
     if (a === "del"){
       if (act.getAttribute("data-armed") === "true"){ removeLead(id); return; }
       act.setAttribute("data-armed","true"); act.textContent = "Tap again to delete";
@@ -1024,15 +1369,27 @@ button.lead-head:hover{background:var(--surface-2)}
     }
   });
 
+  function copyText(text, okMsg){
+    var p; try { p = navigator.clipboard.writeText(text); } catch(e){ p = Promise.reject(e); }
+    p.then(function(){ toast(okMsg); }, function(){ showCopyPanel(text, "Copying was blocked here. Select all and copy it yourself."); });
+  }
+  function showCopyPanel(text, hint){ $("csvHint").textContent = hint; $("csvText").value = text; $("csvPanel").hidden = false; $("csvText").focus(); $("csvText").select(); }
+
+  $("webinarBtn").addEventListener("click", function(){
+    var list = allLeads().filter(function(l){ return l.webinar === "yes" && l.email; });
+    if (!list.length){ toast("Nobody has asked for the webinar yet"); return; }
+    copyText(list.map(function(l){ return l.email; }).join("; "), "Copied " + list.length + (list.length === 1 ? " address" : " addresses") + " for the webinar invite. Paste into BCC.");
+  });
+
   function csvCell(v){ v = v == null ? "" : String(v); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; }
   function buildCsv(rows){
-    var head = ["Captured","Came from","Captured by","Rating","Name","Job title","Company","Email","Mobile","What they do","Interested in","Project","Project or site","Currently specified","They asked for","Next steps agreed","Webinar 30 Oct","Notes","Can contact","Show"];
+    var head = ["Captured","Came from","Visits","Captured by","Rating","Follow-up","Name","Job title","Company","Email","Mobile","What they do","Interested in","Project","Project or site","Currently specified","They asked for","Next steps agreed","Webinar 30 Oct","Can contact","Notes","Show"];
     var lines = [head.join(",")];
     rows.slice().reverse().forEach(function(l){
       lines.push([
-        fmtTime(l.createdAt), l.source === "visitor" ? "Visitor sign-up" : "Staff entry", l.capturedBy, l.staffAt ? l.heat : "Needs notes",
-        l.name, l.title, l.company, l.email, l.phone, l.role, (l.interests||[]).join("; "), PROJECT_LABEL[l.project] || "",
-        l.projectName, l.currentBrand, (l.wants||[]).join("; "), (l.nextSteps||[]).join("; "), WEBINAR_LABEL[l.webinar] || "", l.notes, l.consent ? "Yes" : "No", l.show || SHOW
+        fmtTime(l.createdAt), l.source === "visitor" ? "Visitor sign-up" : "Staff entry", l.visits || 1, l.capturedBy, l.heat || "Needs notes", STATUS_LABEL[statusOf(l)],
+        l.name, l.title, l.company, l.email, l.phone, roleLabel(l), (l.interests||[]).join("; "), PROJECT_LABEL[l.project] || "",
+        l.projectName, l.currentBrand, wantsList(l).join("; "), (l.nextSteps||[]).join("; "), WEBINAR_LABEL[l.webinar] || "", l.consent ? "Yes" : "No", l.notes, l.show || SHOW
       ].map(csvCell).join(","));
     });
     return lines.join("\r\n");
@@ -1040,10 +1397,10 @@ button.lead-head:hover{background:var(--surface-2)}
   $("exportBtn").addEventListener("click", async function(){
     var rows = allLeads();
     if (!rows.length){ toast("No leads to export yet"); return; }
-    var csv = buildCsv(rows);
+    var csv = buildCsv(rows), n = rows.length + (rows.length === 1 ? " lead" : " leads");
     var name = "produal-smart-buildings-leads-" + new Date().toISOString().slice(0,10) + ".csv";
     if (state.downloads){
-      try { await state.downloads.save({filename: name, data: "﻿" + csv}); toast("Exported " + rows.length + (rows.length === 1 ? " lead" : " leads")); return; }
+      try { await state.downloads.save({filename: name, data: "﻿" + csv}); toast("Exported " + n); return; }
       catch(e){ if (e && (e.code === "declined" || e.code === "rate_limited")) return; }
     }
     if (STANDALONE){
@@ -1051,14 +1408,14 @@ button.lead-head:hover{background:var(--surface-2)}
         var url = URL.createObjectURL(new Blob(["﻿" + csv], {type:"text/csv;charset=utf-8"}));
         var a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
         setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-        toast("Exported " + rows.length + (rows.length === 1 ? " lead" : " leads")); return;
+        toast("Exported " + n); return;
       } catch(e){}
     }
-    $("csvText").value = csv; $("csvPanel").hidden = false; $("csvText").focus(); $("csvText").select();
+    showCopyPanel(csv, "The download was blocked here. Select all, copy, and paste into Excel.");
   });
   $("csvSelect").addEventListener("click", function(){
     var t = $("csvText"); t.focus(); t.select();
-    try { navigator.clipboard.writeText(t.value).then(function(){ toast("CSV copied. Paste it into Excel."); }, function(){}); } catch(e){}
+    try { navigator.clipboard.writeText(t.value).then(function(){ toast("Copied."); }, function(){}); } catch(e){}
   });
   $("csvClose").addEventListener("click", function(){ $("csvPanel").hidden = true; });
 
@@ -1120,12 +1477,12 @@ button.lead-head:hover{background:var(--surface-2)}
       try { await state.db.doc("leads/" + id).delete(); state.remote.delete(id); }
       catch(e){ state.deleted.delete(id); toast("Couldn't delete that lead. Check the connection and try again."); }
     }
-    state.open.delete(id); renderAll();
+    state.open.delete(id); state.draftOpen.delete(id); renderAll();
   }
 
   /* ================= Rendering glue ================= */
   function renderCounts(){
-    var need = allLeads().filter(function(l){ return !l.staffAt; }).length;
+    var need = allLeads().filter(needsNotes).length;
     $("needBadge").textContent = need; $("needBadge").hidden = !state.unlocked || !need;
   }
   function renderAll(){
@@ -1164,16 +1521,16 @@ button.lead-head:hover{background:var(--surface-2)}
     var idle = Date.now() - state.lastActivity;
     if (state.unlocked && idle > IDLE_LOCK_MS){ lock(false); return; }
     if (state.view === "visitor"){
-      if (state.thanksAt && Date.now() - state.thanksAt > THANKS_MS) resetVisitor();
-      else if (!state.thanksAt && idle > VISITOR_IDLE_MS && visitorHasInput()) resetVisitor();
+      if (state.vstage === "thanks" && Date.now() - state.thanksAt > THANKS_MS) resetVisitor();
+      else if (state.vstage === "wizard" && idle > VISITOR_IDLE_MS) resetVisitor();
     }
-  }, 5000);
+  }, 3000);
 
   async function keepAwake(){ try { if ("wakeLock" in navigator && document.visibilityState === "visible") await navigator.wakeLock.request("screen"); } catch(e){} }
   document.addEventListener("visibilitychange", keepAwake); keepAwake();
 
   /* ================= Start ================= */
-  syncForm("v"); syncForm("s"); renderAll();
+  syncForm("v"); syncForm("s"); showStage("attract"); renderAll();
   var use = STANDALONE ? null : window.claude.use.bind(window.claude);
   if (!use){ state.mode = "local"; renderAll(); return; }
   use("downloads").then(function(d){ state.downloads = d; }, function(){});
