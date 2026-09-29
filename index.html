@@ -438,7 +438,7 @@ button.lead-head:hover{background:var(--surface-2)}
       </button>
       <button class="tab" role="tab" id="tab-data" aria-controls="view-data" aria-selected="false" data-go="data">
         <svg class="lock-ic" viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="7" width="10" height="7.5" rx="1.6" fill="currentColor"/><path d="M5.2 7V5.2a2.8 2.8 0 0 1 5.6 0V7" fill="none" stroke="currentColor" stroke-width="1.7"/></svg>
-        <span class="lg">Data &amp; follow-up</span><span class="sm">Data</span>
+        <span class="lg">Follow-up</span><span class="sm">Follow-up</span>
       </button>
     </div>
     <div class="tab-right">
@@ -749,7 +749,7 @@ button.lead-head:hover{background:var(--surface-2)}
   var CROSS_WANT = "Cross-spec & comparative pricing against my current supplier";
   var OPTIONS = {
     role: ["BMS contractor","System integrator","M&E consultant","M&E contractor","Facilities / building owner","Distributor","Other"],
-    interests: ["RTX-D room displays","Room sensors & controllers","Pressure & duct","Wireless (MESH / LoRaWAN)","IAQ & CO₂","Gas detection"],
+    interests: ["RTX-D room displays","Room sensors & controllers","Pressure & duct","Wireless (MESH / LoRaWAN)","IAQ & CO₂","OEM / AHU","Specialist detection"],
     project: [["0-3","Yes, in the next 3 months"],["3-12","Yes, in 3 to 12 months"],["none","Not right now"]],
     wants: [CROSS_WANT,"Product datasheets","A price for a project","CPD for my team","A demo or site visit","A sample to try","Other"],
     webinar: [["yes","Yes, send me the invite"],["no","Not this time"]],
@@ -1099,7 +1099,7 @@ button.lead-head:hover{background:var(--surface-2)}
 
   function openPin(target){
     state.pinTarget = target; state.pinBuf = "";
-    $("pinSub").textContent = "Enter the PIN to open " + (target === "staff" ? "Staff notes." : "Data & follow-up.");
+    $("pinSub").textContent = "Enter the PIN to open " + (target === "staff" ? "Staff notes." : "Follow-up.");
     $("pinErr").hidden = true; renderPin(); $("pin").hidden = false;
     setTimeout(function(){ try { document.querySelector('#keypad [data-k="1"]').focus(); } catch(e){} }, 30);
   }
