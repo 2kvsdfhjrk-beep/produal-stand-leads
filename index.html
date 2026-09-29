@@ -216,9 +216,10 @@ body.front .sync[data-state="idle"] i,body.front .sync[data-state="connecting"] 
 body.front main{padding-top:0}
 .front-page{position:relative;overflow:hidden;color:#fff;min-height:calc(100vh - 57px);min-height:calc(100dvh - 57px);display:grid;grid-template-rows:1fr auto;justify-items:center;text-align:center;padding-block:52px 22px}
 .front-inner{position:relative;z-index:1;align-self:center;display:grid;justify-items:center;gap:26px;max-width:780px}
-.front-logo{display:block;width:min(500px,82vw);height:auto;aspect-ratio:2182/466;color:#fff;margin-bottom:18px}
-.front-page h1{margin:0;font:800 clamp(40px,7.8vw,78px)/1.02 var(--display);letter-spacing:-.035em;color:#fff;text-wrap:balance}
-.front-page p{margin:0;font-size:clamp(18px,2.5vw,21px);line-height:1.6;max-width:38ch;color:rgba(255,255,255,.9);text-wrap:pretty}
+.wrap.front-inner{max-width:1000px}
+.front-logo{display:block;width:min(500px,82vw,50vh);height:auto;aspect-ratio:2182/466;color:#fff;margin-bottom:18px}
+.front-page h1{margin:0;font:800 clamp(34px,min(7.8vw,8.4vh),80px)/1.02 var(--display);letter-spacing:-.035em;color:#fff;text-wrap:balance}
+.front-page p{margin:0;font-size:clamp(17px,min(2.5vw,2.4vh),21px);line-height:1.6;max-width:38ch;color:rgba(255,255,255,.9);text-wrap:pretty}
 .front-foot{position:relative;z-index:1;margin:0;max-width:none!important;padding-inline:16px;font:500 14px var(--body);letter-spacing:.01em;color:rgba(255,255,255,.78)!important}
 .start-wrap{position:relative;display:inline-grid;margin-top:14px;border-radius:22px}
 .start{position:relative;overflow:hidden;min-height:78px;padding:0 40px 0 48px;border:0;border-radius:22px;background:#fff;color:#2D51A2;font:800 24px var(--display);letter-spacing:-.02em;display:inline-flex;align-items:center;gap:16px;box-shadow:0 20px 48px rgba(10,20,60,.34);transition:transform .12s,box-shadow .15s}
@@ -235,14 +236,20 @@ body.front main{padding-top:0}
   @keyframes nudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
 }
 .front-page{cursor:pointer}
-.readings{position:absolute;inset:0;pointer-events:none}
-.rd{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);display:inline-flex;align-items:baseline;gap:6px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff;font:600 13px var(--body);white-space:nowrap;opacity:.8;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.readings{display:flex;justify-content:space-between;align-items:flex-start;width:min(620px,100%);pointer-events:none}
+.readings.top{margin-bottom:-4px}
+.readings.top .rd:first-child{margin-top:16px}
+.readings.bottom{margin-top:6px}
+.readings.bottom .rd:last-child{margin-top:20px}
+.rd{position:relative;display:inline-flex;align-items:baseline;gap:6px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff;font:600 13px var(--body);white-space:nowrap;opacity:.8;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 .rd b{font:700 21px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .rd small{font:600 13px var(--body);opacity:.85}
-@media (max-width:640px){.rd.side,.rd.low{display:none}.rd[data-r="temp"]{--x:25%!important;--y:6%!important}.rd[data-r="co2"]{--x:73%!important;--y:6%!important}.rd{padding:7px 12px}.rd b{font-size:17px}}
+@media (max-width:640px){.rd{padding:7px 12px}.rd b{font-size:17px}.rd small{font-size:12px}}
+@media (max-height:900px){.front-page{padding-block:30px 14px}.front-inner{gap:20px}.front-logo{margin-bottom:6px}.start{min-height:68px;font-size:22px}}
+@media (max-height:760px){.readings{display:none}}
 @media (prefers-reduced-motion:no-preference){
   .rd{opacity:0;animation:surface 10.5s ease-in-out infinite;animation-delay:var(--d)}
-  @keyframes surface{0%{opacity:0;transform:translate(-50%,-30%)}16%{opacity:.95;transform:translate(-50%,-50%)}60%{opacity:.95;transform:translate(-50%,-54%)}78%,100%{opacity:0;transform:translate(-50%,-66%)}}
+  @keyframes surface{0%{opacity:0;transform:translateY(12px)}16%{opacity:.95;transform:translateY(0)}60%{opacity:.95;transform:translateY(-4px)}78%,100%{opacity:0;transform:translateY(-14px)}}
 }
 .rings{position:absolute;left:50%;top:42%;width:0;height:0;pointer-events:none}
 .rings i{position:absolute;left:0;top:0;width:78vmin;height:78vmin;margin:-39vmin 0 0 -39vmin;border:1.5px solid rgba(255,255,255,.2);border-radius:50%}
@@ -448,17 +455,19 @@ button.lead-head:hover{background:var(--surface-2)}
   <section id="view-visitor" role="tabpanel" aria-labelledby="tab-visitor">
     <div class="front-page" id="attract">
       <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="readings" aria-hidden="true">
-        <span class="rd" data-r="temp" style="--x:20%;--y:14%;--d:.4s"><b>21.4</b><small>&deg;C</small></span>
-        <span class="rd" data-r="co2" style="--x:79%;--y:10%;--d:2.2s"><b>612</b><small>ppm CO&#8322;</small></span>
-        <span class="rd low" data-r="rh" style="--x:22%;--y:86%;--d:5.1s"><b>45</b><small>%rH</small></span>
-        <span class="rd low" data-r="voc" style="--x:77%;--y:83%;--d:7.9s"><b>372</b><small>&micro;g/m&sup3; VOC</small></span>
-      </div>
       <div class="wrap front-inner">
+        <div class="readings top" aria-hidden="true">
+          <span class="rd" data-r="temp" style="--d:.4s"><b>21.4</b><small>&deg;C</small></span>
+          <span class="rd" data-r="co2" style="--d:2.2s"><b>612</b><small>ppm CO&#8322;</small></span>
+        </div>
         <svg class="front-logo" role="img" aria-label="Produal, part of BEMSIQ Group"><use href="#produal-lockup"/></svg>
         <h1>Manage the invisible</h1>
         <p>We make the invisible visible and measurable for the building automation and HVAC industry. Our devices optimise buildings, economise costs, and reduce the environmental impact of all buildings.</p>
         <div class="start-wrap"><button type="button" class="start" id="startBtn"><span class="start-label">Leave your details</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="readings bottom" aria-hidden="true">
+          <span class="rd" data-r="rh" style="--d:5.1s"><b>45</b><small>%rH</small></span>
+          <span class="rd" data-r="voc" style="--d:7.9s"><b>372</b><small>&micro;g/m&sup3; VOC</small></span>
+        </div>
       </div>
       <p class="front-foot">Smart Buildings Show · ExCeL London · 14–15 October 2026</p>
     </div>
