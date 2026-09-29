@@ -531,7 +531,7 @@ button.lead-head:hover{background:var(--surface-2)}
               </span>
             </label>
             <div class="recap">
-              <h3>What we'll follow up with</h3>
+              <h3>What we'll do next</h3>
               <ul class="ticks" id="recapList"></ul>
             </div>
           </section>
@@ -764,12 +764,12 @@ button.lead-head:hover{background:var(--surface-2)}
   WANT_TO_STEP["A demo or site visit"] = "Site visit or demo";
   WANT_TO_STEP["A sample to try"] = "Send a sample";
   var WANT_PROMISE = {};
-  WANT_PROMISE[CROSS_WANT] = "A like-for-like cross-spec with comparative pricing";
-  WANT_PROMISE["Product datasheets"] = "Datasheets for the products you picked";
-  WANT_PROMISE["A price for a project"] = "A price for your project";
-  WANT_PROMISE["CPD for my team"] = "Dates for our CIBSE-approved CPD";
-  WANT_PROMISE["A demo or site visit"] = "A call to arrange a demo or visit";
-  WANT_PROMISE["A sample to try"] = "A sample to try";
+  WANT_PROMISE[CROSS_WANT] = "Contact you to arrange a cross-spec and comparative pricing";
+  WANT_PROMISE["Product datasheets"] = "Send you datasheets for the products you're interested in";
+  WANT_PROMISE["A price for a project"] = "Contact you to discuss pricing for your project";
+  WANT_PROMISE["CPD for my team"] = "Contact you to arrange a CPD for your team";
+  WANT_PROMISE["A demo or site visit"] = "Contact you to arrange a demo or site visit";
+  WANT_PROMISE["A sample to try"] = "Contact you to arrange a sample";
   var WARM_STEPS = ["Cross-spec & comparative pricing","Price a job","Site visit or demo"];
   var STATUS = [["todo","To contact"],["contacted","Contacted"],["meeting","Meeting booked"],["quoted","Quoted"],["won","Won"],["lost","Lost"]];
   var STATUS_LABEL = {}; STATUS.forEach(function(s){ STATUS_LABEL[s[0]] = s[1]; });
@@ -1024,9 +1024,9 @@ button.lead-head:hover{background:var(--surface-2)}
   });
 
   function promises(m){
-    var out = (m.wants || []).map(function(w){ return w === "Other" ? (m.wantsOther ? "A reply about: " + m.wantsOther : null) : WANT_PROMISE[w]; }).filter(Boolean);
-    if (m.webinar === "yes") out.push("Your invite to the webinar on Friday 30 October");
-    if (!out.length) out.push("A follow-up on today's conversation");
+    var out = (m.wants || []).map(function(w){ return w === "Other" ? (m.wantsOther ? "Contact you about: " + m.wantsOther : null) : WANT_PROMISE[w]; }).filter(Boolean);
+    if (m.webinar === "yes") out.push("Send you an invite to our webinar on Friday 30 October");
+    if (!out.length) out.push("Contact you to follow up on today's conversation");
     return out;
   }
   function renderRecap(){
