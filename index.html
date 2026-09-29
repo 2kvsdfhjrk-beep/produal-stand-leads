@@ -225,6 +225,16 @@ body.front main{padding-top:0}
 .start:hover{box-shadow:0 20px 46px rgba(10,20,60,.36)}
 .start:hover svg{transform:translateX(3px)}
 .start:active{transform:scale(.98)}
+.front-page{cursor:pointer}
+.readings{position:absolute;inset:0;pointer-events:none}
+.rd{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);display:inline-flex;align-items:baseline;gap:6px;padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);color:#fff;font:600 13px var(--body);white-space:nowrap;opacity:.8;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.rd b{font:700 21px/1 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.rd small{font:600 13px var(--body);opacity:.85}
+@media (max-width:640px){.rd.side,.rd.low{display:none}.rd[data-r="temp"]{--x:25%!important;--y:6%!important}.rd[data-r="co2"]{--x:73%!important;--y:6%!important}.rd{padding:7px 12px}.rd b{font-size:17px}}
+@media (prefers-reduced-motion:no-preference){
+  .rd{opacity:0;animation:surface 10.5s ease-in-out infinite;animation-delay:var(--d)}
+  @keyframes surface{0%{opacity:0;transform:translate(-50%,-30%)}16%{opacity:.95;transform:translate(-50%,-50%)}60%{opacity:.95;transform:translate(-50%,-54%)}78%,100%{opacity:0;transform:translate(-50%,-66%)}}
+}
 .rings{position:absolute;left:50%;top:42%;width:0;height:0;pointer-events:none}
 .rings i{position:absolute;left:0;top:0;width:78vmin;height:78vmin;margin:-39vmin 0 0 -39vmin;border:1.5px solid rgba(255,255,255,.2);border-radius:50%}
 .rings i:nth-child(1){transform:scale(.55);opacity:.55}
@@ -429,6 +439,14 @@ button.lead-head:hover{background:var(--surface-2)}
   <section id="view-visitor" role="tabpanel" aria-labelledby="tab-visitor">
     <div class="front-page" id="attract">
       <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="readings" aria-hidden="true">
+        <span class="rd" data-r="temp" style="--x:20%;--y:14%;--d:.4s"><b>21.4</b><small>&deg;C</small></span>
+        <span class="rd" data-r="co2" style="--x:79%;--y:10%;--d:2.2s"><b>612</b><small>ppm CO&#8322;</small></span>
+        <span class="rd side" data-r="rh" style="--x:10%;--y:58%;--d:4.1s"><b>45</b><small>%rH</small></span>
+        <span class="rd side" data-r="dp" style="--x:90%;--y:50%;--d:5.9s"><b>125</b><small>Pa</small></span>
+        <span class="rd low" data-r="voc" style="--x:23%;--y:85%;--d:7.6s"><b>372</b><small>&micro;g/m&sup3; VOC</small></span>
+        <span class="rd low" data-r="occ" style="--x:77%;--y:88%;--d:9.3s"><b>Occupied</b></span>
+      </div>
       <div class="wrap front-inner">
         <svg class="front-logo" role="img" aria-label="Produal, part of BEMSIQ Group"><use href="#produal-lockup"/></svg>
         <h1>Manage the invisible</h1>
@@ -937,7 +955,25 @@ button.lead-head:hover{background:var(--surface-2)}
     showStage("wizard"); goStep(0, true);
     setTimeout(function(){ try { $("v-name").focus({preventScroll:true}); } catch(e){} }, 80);
   }
-  $("startBtn").addEventListener("click", function(){ startWizard(); });
+  $("startBtn").addEventListener("click", function(ev){ ev.stopPropagation(); startWizard(); });
+  $("attract").addEventListener("click", function(){ startWizard(); });
+  var READINGS = {
+    temp: {v:21.4, min:20.6, max:22.8, step:.1, dp:1},
+    co2:  {v:612, min:470, max:880, step:14, dp:0},
+    rh:   {v:45, min:39, max:53, step:1, dp:0},
+    dp:   {v:125, min:108, max:142, step:2, dp:0},
+    voc:  {v:372, min:240, max:520, step:10, dp:0}
+  };
+  setInterval(function(){
+    if (state.view !== "visitor" || state.vstage !== "attract" || document.hidden) return;
+    Object.keys(READINGS).forEach(function(k){
+      var r = READINGS[k], el = document.querySelector('.rd[data-r="' + k + '"] b'); if (!el) return;
+      r.v = Math.min(r.max, Math.max(r.min, r.v + (Math.random() - .5) * 2 * r.step));
+      el.textContent = r.v.toFixed(r.dp);
+    });
+    var occ = document.querySelector('.rd[data-r="occ"] b');
+    if (occ && Math.random() < .12) occ.textContent = occ.textContent === "Occupied" ? "Vacant" : "Occupied";
+  }, 1800);
 
   $("startOver").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); });
 
