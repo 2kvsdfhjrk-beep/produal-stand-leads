@@ -442,10 +442,8 @@ button.lead-head:hover{background:var(--surface-2)}
       <div class="readings" aria-hidden="true">
         <span class="rd" data-r="temp" style="--x:20%;--y:14%;--d:.4s"><b>21.4</b><small>&deg;C</small></span>
         <span class="rd" data-r="co2" style="--x:79%;--y:10%;--d:2.2s"><b>612</b><small>ppm CO&#8322;</small></span>
-        <span class="rd side" data-r="rh" style="--x:10%;--y:58%;--d:4.1s"><b>45</b><small>%rH</small></span>
-        <span class="rd side" data-r="dp" style="--x:90%;--y:50%;--d:5.9s"><b>125</b><small>Pa</small></span>
-        <span class="rd low" data-r="voc" style="--x:23%;--y:85%;--d:7.6s"><b>372</b><small>&micro;g/m&sup3; VOC</small></span>
-        <span class="rd low" data-r="occ" style="--x:77%;--y:88%;--d:9.3s"><b>Occupied</b></span>
+        <span class="rd low" data-r="rh" style="--x:22%;--y:86%;--d:5.1s"><b>45</b><small>%rH</small></span>
+        <span class="rd low" data-r="voc" style="--x:77%;--y:83%;--d:7.9s"><b>372</b><small>&micro;g/m&sup3; VOC</small></span>
       </div>
       <div class="wrap front-inner">
         <svg class="front-logo" role="img" aria-label="Produal, part of BEMSIQ Group"><use href="#produal-lockup"/></svg>
@@ -961,7 +959,6 @@ button.lead-head:hover{background:var(--surface-2)}
     temp: {v:21.4, min:20.6, max:22.8, step:.1, dp:1},
     co2:  {v:612, min:470, max:880, step:14, dp:0},
     rh:   {v:45, min:39, max:53, step:1, dp:0},
-    dp:   {v:125, min:108, max:142, step:2, dp:0},
     voc:  {v:372, min:240, max:520, step:10, dp:0}
   };
   setInterval(function(){
@@ -971,8 +968,6 @@ button.lead-head:hover{background:var(--surface-2)}
       r.v = Math.min(r.max, Math.max(r.min, r.v + (Math.random() - .5) * 2 * r.step));
       el.textContent = r.v.toFixed(r.dp);
     });
-    var occ = document.querySelector('.rd[data-r="occ"] b');
-    if (occ && Math.random() < .12) occ.textContent = occ.textContent === "Occupied" ? "Vacant" : "Occupied";
   }, 1800);
 
   $("startOver").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); });
