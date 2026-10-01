@@ -585,7 +585,7 @@ button.lead-head:hover{background:var(--surface-2)}
           <section class="step" data-step="6" hidden>
             <h2 class="step-q" tabindex="-1">Can we keep in touch?</h2>
             <label class="consent-card" for="v-consent">
-              <input type="checkbox" id="v-consent" data-form="v" data-field="consent">
+              <input type="checkbox" id="v-consent" data-form="v" data-field="consent" checked>
               <span>Produal can contact me about this
                 <small>We'll only use your details to follow up on what you've asked for. Opt out any time.</small>
               </span>
@@ -809,7 +809,7 @@ button.lead-head:hover{background:var(--surface-2)}
   var CROSS_WANT = "Cross-spec & comparative pricing against my current supplier";
   var OPTIONS = {
     role: ["BMS contractor","System integrator","M&E consultant","M&E contractor","Facilities / building owner","Distributor","Other"],
-    interests: ["RTX-D room displays","Room sensors & controllers","Pressure & duct","Wireless (MESH / LoRaWAN)","IAQ & CO₂","OEM / AHU","Specialist detection"],
+    interests: ["RTX-D room displays","XRC-D","Room sensors & controllers","Pressure & duct","Wireless (MESH / LoRaWAN)","IAQ & CO₂","OEM / AHU","Specialist detection"],
     project: [["0-3","Yes, in the next 3 months"],["3-12","Yes, in 3 to 12 months"],["none","Not right now"]],
     wants: [CROSS_WANT,"Product datasheets","A price for a project","CPD for my team","A demo or site visit","A sample to try","Other"],
     webinar: [["yes","Yes, send me the invite"],["no","Not this time"]],
@@ -869,8 +869,8 @@ button.lead-head:hover{background:var(--surface-2)}
   };
   if (!Array.isArray(state.pending)) state.pending = [];
 
-  function blankVisitor(){ return {name:"",company:"",email:"",phone:"",title:"",role:"",roleOther:"",interests:[],project:"",wants:[],wantsOther:"",currentBrand:"",webinar:"",consent:false}; }
-  function blankStaff(){ return Object.assign(blankVisitor(), {id:null, source:"staff", createdAt:"", heat:"", heatAuto:true, nextSteps:[], projectName:"", notes:""}); }
+  function blankVisitor(){ return {name:"",company:"",email:"",phone:"",title:"",role:"",roleOther:"",interests:[],project:"",wants:[],wantsOther:"",currentBrand:"",webinar:"",consent:true}; }
+  function blankStaff(){ return Object.assign(blankVisitor(), {consent:false, id:null, source:"staff", createdAt:"", heat:"", heatAuto:true, nextSteps:[], projectName:"", notes:""}); }
   var models = { v: blankVisitor(), s: blankStaff() };
 
   /* ================= Chips + binding ================= */
@@ -1358,7 +1358,7 @@ button.lead-head:hover{background:var(--surface-2)}
       '</svg>';
   }
   $("doneBtn").addEventListener("click", function(){ resetVisitor(); window.scrollTo({top:0}); });
-  function visitorHasInput(){ var m = models.v; return !!(m.name || m.company || m.email || m.phone || m.title || m.role || m.project || m.webinar || m.currentBrand || m.wantsOther || m.roleOther || m.interests.length || m.wants.length || m.consent); }
+  function visitorHasInput(){ var m = models.v; return !!(m.name || m.company || m.email || m.phone || m.title || m.role || m.project || m.webinar || m.currentBrand || m.wantsOther || m.roleOther || m.interests.length || m.wants.length); }
 
   /* ================= Views + PIN ================= */
   function go(view){
